@@ -23,9 +23,9 @@ namespace Logic
             return objCat.showCommentDDL();
         }
         //Metodo para guardar un nuevo comentario
-        public bool saveComment(string p_com_text, DateTime p_com_fecha, int p_com_clasificacion)
+        public bool saveComment(string p_com_text, DateTime p_com_fecha, int p_com_clasificacion, int _fkclient, int _fkproduct)
         {
-            return objCat.saveComment(p_com_text, p_com_fecha, p_com_clasificacion);
+            return objCat.saveComment(p_com_text, p_com_fecha, p_com_clasificacion, _fkclient, _fkproduct);
         }
         //Metodo para actualizar un comentario
         public bool updateComment(int p_com_id, int p_com_clasificacion, string p_com_text, DateTime p_com_fecha)

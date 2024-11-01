@@ -43,7 +43,7 @@ namespace Data
         }
 
         //Metodo para guardar un nuevo comentario
-        public bool saveComment(string p_com_text, DateTime p_com_fecha, int p_com_clasificacion)
+        public bool saveComment(string p_com_text, DateTime p_com_fecha, int p_com_clasificacion, int _fkclient, int _fkproduct)
         {
             bool executed = false;
             int row;
@@ -55,6 +55,9 @@ namespace Data
             objSelectCmd.Parameters.Add("com_text", MySqlDbType.VarString).Value = p_com_text;
             objSelectCmd.Parameters.Add("com_fecha", MySqlDbType.DateTime).Value = p_com_fecha;
             objSelectCmd.Parameters.Add("com_clasificacion", MySqlDbType.Int32).Value = p_com_clasificacion;
+            objSelectCmd.Parameters.Add("tbl_cliente_cli_id", MySqlDbType.Int32).Value = _fkclient;
+            objSelectCmd.Parameters.Add("tbl_producto_pro_id", MySqlDbType.Int32).Value = _fkproduct;
+
 
             try
             {
