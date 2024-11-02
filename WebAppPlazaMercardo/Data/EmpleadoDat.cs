@@ -44,22 +44,21 @@ namespace Data
         }
 
         //Metodo para guardar un nuevo Empleado
-        public bool saveEmployee(string e_identification,string e_names,
-            string e_lastnames,string e_phone,string e_addres)
+        public bool saveEmployee(string e_identification, string e_names,
+     string e_lastnames, string e_phone, string e_addres)
         {
             bool executed = false;
             int row;
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spInsertEmployee"; //nombre del procedimiento almacenado
+            objSelectCmd.CommandText = "spInsertEmployee"; // nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
-            objSelectCmd.Parameters.Add("emp_identificacion", MySqlDbType.VarString).Value = e_identification;
-            objSelectCmd.Parameters.Add("emp_nombres", MySqlDbType.VarString).Value = e_names;
-            objSelectCmd.Parameters.Add("emp_apellidos", MySqlDbType.VarString).Value = e_lastnames;
-            objSelectCmd.Parameters.Add("emp_telefono", MySqlDbType.VarString).Value = e_phone;
-            objSelectCmd.Parameters.Add("emp_direccion", MySqlDbType.VarString).Value = e_addres;
-
+            objSelectCmd.Parameters.Add("e_identification", MySqlDbType.VarString).Value = e_identification;
+            objSelectCmd.Parameters.Add("e_names", MySqlDbType.VarString).Value = e_names;
+            objSelectCmd.Parameters.Add("e_lastnames", MySqlDbType.VarString).Value = e_lastnames;
+            objSelectCmd.Parameters.Add("e_phone", MySqlDbType.VarString).Value = e_phone;
+            objSelectCmd.Parameters.Add("e_addres", MySqlDbType.VarString).Value = e_addres;
 
             try
             {
@@ -75,8 +74,8 @@ namespace Data
             }
             objPer.closeConnection();
             return executed;
-
         }
+
 
         //Metodo para actualizar un Empleado
         public bool updateEmployee(int e_id, string e_identification, string e_names,
