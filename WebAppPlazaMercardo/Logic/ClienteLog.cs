@@ -27,11 +27,11 @@ namespace Logic
         }
 
         //Metodo para guardar un nuevo cliente
-        public bool saveClient(string c_names, string c_lastnames,
-            string c_mail, string c_phone, string c_addres)
+        public bool saveClient(string _names, string _lastnames,
+            string _mail, string _phone, string _addres)
         {
-            return objCli.saveClient(c_names, c_lastnames,
-            c_mail, c_phone, c_addres);
+            return objCli.saveClient(_names, _lastnames,
+            _mail, _phone, _addres);
         }
 
         //Metodo para actualizar un cliente
