@@ -43,7 +43,7 @@ namespace Data
         }
 
         //Metodo para guardar una nueva gestion
-        public bool saveManagement(string p_ges_descripcion, DateTime p_ges_fecha)
+        public bool saveManagement(string p_ges_descripcion, DateTime p_ges_fecha, int _fkemployee, int _fkproduct)
         {
             bool executed = false;
             int row;
@@ -54,6 +54,9 @@ namespace Data
             objSelectCmd.CommandType = CommandType.StoredProcedure;
             objSelectCmd.Parameters.Add("ges_descripcion", MySqlDbType.VarString).Value = p_ges_descripcion;
             objSelectCmd.Parameters.Add("ges_fecha", MySqlDbType.DateTime).Value = p_ges_fecha;
+            objSelectCmd.Parameters.Add("tbl_empleado_emp_id", MySqlDbType.Int32).Value = _fkemployee;
+            objSelectCmd.Parameters.Add("tbl_producto_pro_id", MySqlDbType.Int32).Value = _fkproduct;
+
 
             try
             {
