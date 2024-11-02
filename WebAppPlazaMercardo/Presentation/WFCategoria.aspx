@@ -6,7 +6,7 @@
     <asp:TextBox ID="TBId" runat="server" Visible="false"></asp:TextBox>
     <%--Descripción--%>
     <asp:Label ID="Label1" runat="server" Text="Ingrese la descripción de la categoría"></asp:Label>
-    <asp:TextBox ID="TBDescription" runat="server" OnTextChanged="TBDescription_TextChanged"></asp:TextBox>
+    <asp:TextBox ID="TBDescription" runat="server"></asp:TextBox>
     <br />
     <%--Categoria--%>
     <asp:Label ID="Label6" runat="server" Text="Seleccione la categoría"></asp:Label>
