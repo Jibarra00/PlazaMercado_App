@@ -54,7 +54,7 @@ namespace Presentation
             DDLClient.DataSource = objCli.showClientDDL();
             DDLClient.DataValueField = "cli_id"; //Nombre de la llave primaria
             DDLClient.DataTextField = "cli_nombres";
-            DDLClient.DataTextField = "cli_apellidos";
+            
             DDLClient.DataBind();
             DDLClient.Items.Insert(0, "Seleccione");
         }
@@ -63,7 +63,6 @@ namespace Presentation
         {
             DDLProducto.DataSource = objpro.showProductoDDL();
             DDLProducto.DataValueField = "pro_id"; //Nombre de la llave primaria
-            DDLProducto.DataValueField = "pro_codigo";
             DDLProducto.DataTextField = "pro_descripcion";
             DDLProducto.DataBind();
             DDLProducto.Items.Insert(0, "Seleccione");
