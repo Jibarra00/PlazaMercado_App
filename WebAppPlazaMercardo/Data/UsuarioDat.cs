@@ -58,9 +58,9 @@ namespace Data
             // Se agregan parámetros al comando para pasar los valores del usuario.
             objSelectCmd.Parameters.Add("u_email", MySqlDbType.VarString).Value = _email;
             objSelectCmd.Parameters.Add("u_password", MySqlDbType.VarString).Value = _password;
-            objSelectCmd.Parameters.Add("u_salt", MySqlDbType.Int32).Value = _salt;
-            objSelectCmd.Parameters.Add("u_state", MySqlDbType.Double).Value = _state;
-            objSelectCmd.Parameters.Add("u_create_date", MySqlDbType.Double).Value = _Create_Date;
+            objSelectCmd.Parameters.Add("u_salt", MySqlDbType.VarString).Value = _salt;
+            objSelectCmd.Parameters.Add("u_state", MySqlDbType.VarString).Value = _state;
+            objSelectCmd.Parameters.Add("u_create_date", MySqlDbType.Datetime).Value = _Create_Date;
             objSelectCmd.Parameters.Add("fkrol", MySqlDbType.Int32).Value = _fkrol;
             objSelectCmd.Parameters.Add("fkempleado", MySqlDbType.Int32).Value = _fkempleado;
             objSelectCmd.Parameters.Add("fkcliente", MySqlDbType.Int32).Value = _fkcliente;
