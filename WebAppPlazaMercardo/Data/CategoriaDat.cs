@@ -34,7 +34,7 @@ namespace Data
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spSelectCategoryDDL";
+            objSelectCmd.CommandText = "spSelectCategoriesDDL";
             objSelectCmd.CommandType = CommandType.StoredProcedure;
             objAdapter.SelectCommand = objSelectCmd;
             objAdapter.Fill(objData);
@@ -52,7 +52,7 @@ namespace Data
             objSelectCmd.Connection = objPer.openConnection();
             objSelectCmd.CommandText = "spInsertCategory"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
-            objSelectCmd.Parameters.Add("cat_descripcion", MySqlDbType.VarString).Value = _description;
+            objSelectCmd.Parameters.Add("p_cat_descripcion", MySqlDbType.VarString).Value = _description;
 
 
             try
