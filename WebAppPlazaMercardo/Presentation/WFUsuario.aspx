@@ -5,7 +5,7 @@
     <link href="resourse/css/datatables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form runat="server">
+    <form>
         <%--ID--%>
         <asp:HiddenField ID="HFUsuarioID" runat="server" />
         <%--EMAIL--%>
@@ -22,7 +22,11 @@
         <br />
         <%--STATE--%>
         <asp:Label ID="Label4" runat="server" Text="Escriba el estado"></asp:Label>
-        <asp:TextBox ID="TBState" runat="server"></asp:TextBox>
+        <asp:DropDownList ID="DDLState" runat="server">
+            <asp:ListItem Value="0">Seleccione</asp:ListItem>
+            <asp:ListItem Value="Activo">Activo</asp:ListItem>
+            <asp:ListItem Value="Inactivo">Inactivo</asp:ListItem>
+        </asp:DropDownList><br />
         <br />
         <%--FECHA--%>
         <asp:Label ID="Label5" runat="server" Text="Ingrese la fecha (AAAA-MM-DD)"></asp:Label>
@@ -76,7 +80,7 @@
 
 
     <%--DataTables--%>
-    <script src="resourse/js/datatables.min.js" type="text/javascript"></script>
+    <script src="resources/js/datatables.min.js" type="text/javascript"></script>
 
     <%--Usuarios--%>
     <script type="text/javascript">
@@ -92,12 +96,13 @@
                         return JSON.stringify(d);// Convierte los datos a JSON
                     },
                     "dataSrc": function (json) {
-                        return json.d.data;// Obtiene la lista de productos del resultado
+                        return json.d.data;// Obtiene la lista de usuarios del resultado
                     }
                 },
                 "columns": [
                     { "data": "UsuarioID" },
                     { "data": "Correo" },
+                    { "data": "Contraseña" },
                     { "data": "Salt" },
                     { "data": "Estado" },
                     { "data": "Fecha_creacion" },
@@ -109,18 +114,18 @@
                     { "data": "nameCliente" },
                     {
                         "data": null,
-                        "render": function (data, type, row) {
+                        "render": function (row) {
                             return `<button class="edit-btn" data-id="${row.UsuarioID}">Editar</button>
                                  <button class="delete-btn" data-id="${row.UsuarioID}">Eliminar</button>`;
                         }
                     }
                 ],
                 "language": {
-                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "lengthMenu": "Mostrar MENU registros por página",
                     "zeroRecords": "No se encontraron resultados",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "info": "Mostrando página PAGE de PAGES",
                     "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "infoFiltered": "(filtrado de MAX registros totales)",
                     "search": "Buscar:",
                     "paginate": {
                         "first": "Primero",
@@ -153,8 +158,9 @@
         function loadUsuarioData(rowData) {
             $('#<%= HFUsuarioID.ClientID %>').val(rowData.UsuarioID);
             $('#<%= TBEmail.ClientID %>').val(rowData.Correo);
+            $('#<%= TBPassword.ClientID %>').val(rowData.Contraseña);
             $('#<%= TBSalt.ClientID %>').val(rowData.Salt);
-            $('#<%= TBState.ClientID %>').val(rowData.Estado);
+            $('#<%= DDLState.ClientID %>').val(rowData.Estado);
             $('#<%= TBDate.ClientID %>').val(rowData.Fecha_creacion);
             $('#<%= DDLRol.ClientID %>').val(rowData.FkRol);
             $('#<%= DDLEmpleado.ClientID %>').val(rowData.FkEmpleado);
@@ -179,6 +185,3 @@
         }
     </script>
 </asp:Content>
-
-
-

@@ -54,10 +54,11 @@ namespace Presentation
                 usuarioList.Add(new
                 {
                     UsuarioID = row["usu_id"],
-                    Correo = row["usu_contrasena"],
+                    Correo = row["usu_correo"],
+                    Contraseña = row["usu_contrasena"],
                     Salt = row["usu_salt"],
                     Estado = row["usu_estado"],
-                    Fecha_creacion = row["usu_fecha_creacion"],
+                    Fecha_creacion = Convert.ToDateTime(row["usu_fecha_creacion"]).ToString("yyyy-MM-dd"),
                     FkRol = row["tbl_rol_rol_id"],
                     nameRol = row["rol_nombre"],
                     FkEmpleado = row["tbl_empleado_emp_id"],
@@ -114,7 +115,7 @@ namespace Presentation
             TBEmail.Text = "";
             TBPassword.Text = "";
             TBSalt.Text = "";
-            TBState.Text = "";
+            DDLState.SelectedIndex = 0;
             TBDate.Text = "";
             DDLRol.SelectedIndex = 0;
             DDLEmpleado.SelectedIndex = 0;
@@ -130,7 +131,7 @@ namespace Presentation
             _email = TBEmail.Text;
             _password = TBPassword.Text;
             _salt = TBSalt.Text;
-            _state = TBSalt.Text;
+            _state = DDLState.SelectedValue;
             _Create_Date = Convert.ToDateTime(TBDate.Text);
             _fkrol = Convert.ToInt32(DDLRol.SelectedValue);
             _fkempleado = Convert.ToInt32(DDLEmpleado.SelectedValue);
@@ -164,7 +165,7 @@ namespace Presentation
             _email = TBEmail.Text;
             _password = TBPassword.Text;
             _salt = TBSalt.Text;
-            _state = TBSalt.Text;
+            _state = DDLState.SelectedValue;
             _Create_Date = Convert.ToDateTime(TBDate.Text);
             _fkrol = Convert.ToInt32(DDLRol.SelectedValue);
             _fkempleado = Convert.ToInt32(DDLEmpleado.SelectedValue);
