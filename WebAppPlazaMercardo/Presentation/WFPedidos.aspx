@@ -42,7 +42,7 @@
 
     <%--lista de pedidos--%>
     
-    <h2>Lista de Proveedores</h2>
+    <h2>Lista de Pedidos</h2>
     <table id="PedidosTable" class="display" style="width: 100%">
         <thead>
             <tr>
@@ -68,14 +68,14 @@
                 "processing": true,
                 "serverSide": false,
                 "ajax": {
-                    "url": "WFPedidos.aspx/ListPedidos",// Se invoca el WebMethod Listar Productos
+                    "url": "WFPedidos.aspx/ListPedidos",// Se invoca el WebMethod Listar Pedidos
                     "type": "POST",
                     "contentType": "application/json",
                     "data": function (d) {
                         return JSON.stringify(d);// Convierte los datos a JSON
                     },
                     "dataSrc": function (json) {
-                        return json.d.data;// Obtiene la lista de productos del resultado
+                        return json.d.data;// Obtiene la lista de pedidos del resultado
                     }
                 },
                 "columns": [
@@ -140,11 +140,11 @@
             $('#<%= DDLProducto.ClientID %>').val(rowData.FkProducto);
         }
 
-        // Función para eliminar un producto
+        // Función para eliminar un pedido
         function DeletePedido(id) {
             $.ajax({
                 type: "POST",
-                url: "WFPedidos.aspx/DeletePedido",// Se invoca el WebMethod Eliminar un Producto
+                url: "WFPedidos.aspx/DeletePedido",// Se invoca el WebMethod Eliminar un pedido
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({ id: id }),
                 success: function (response) {
