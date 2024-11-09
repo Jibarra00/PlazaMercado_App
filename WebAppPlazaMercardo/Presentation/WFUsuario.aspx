@@ -8,6 +8,7 @@
     <form>
         <%--ID--%>
         <asp:HiddenField ID="HFUsuarioID" runat="server" />
+        <br />
         <%--EMAIL--%>
         <asp:Label ID="Label1" runat="server" Text="Ingrese el correo electronico "></asp:Label>
         <asp:TextBox ID="TBEmail" runat="server"></asp:TextBox>
@@ -16,21 +17,16 @@
         <asp:Label ID="Label2" runat="server" Text="Ingrese la contraseña"></asp:Label>
         <asp:TextBox ID="TBPassword" runat="server"></asp:TextBox>
         <br />
-        <%--SALT--%>
-        <asp:Label ID="Label3" runat="server" Text="Escriba el salt"></asp:Label>
-        <asp:TextBox ID="TBSalt" runat="server"></asp:TextBox>
-        <br />
-        <%--STATE--%>
         <asp:Label ID="Label4" runat="server" Text="Escriba el estado"></asp:Label>
         <asp:DropDownList ID="DDLState" runat="server">
             <asp:ListItem Value="0">Seleccione</asp:ListItem>
             <asp:ListItem Value="Activo">Activo</asp:ListItem>
             <asp:ListItem Value="Inactivo">Inactivo</asp:ListItem>
-        </asp:DropDownList><br />
+        </asp:DropDownList>
         <br />
         <%--FECHA--%>
         <asp:Label ID="Label5" runat="server" Text="Ingrese la fecha (AAAA-MM-DD)"></asp:Label>
-        <asp:TextBox ID="TBDate" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TBDate" runat="server" TextMode="Date"></asp:TextBox>
         <br />
         <%--ROL--%>
         <asp:Label ID="Label6" runat="server" Text="Seleccione el rol"></asp:Label>
@@ -158,8 +154,7 @@
         function loadUsuarioData(rowData) {
             $('#<%= HFUsuarioID.ClientID %>').val(rowData.UsuarioID);
             $('#<%= TBEmail.ClientID %>').val(rowData.Correo);
-            $('#<%= TBPassword.ClientID %>').val(rowData.Contraseña);
-            $('#<%= TBSalt.ClientID %>').val(rowData.Salt);
+            
             $('#<%= DDLState.ClientID %>').val(rowData.Estado);
             $('#<%= TBDate.ClientID %>').val(rowData.Fecha_creacion);
             $('#<%= DDLRol.ClientID %>').val(rowData.FkRol);

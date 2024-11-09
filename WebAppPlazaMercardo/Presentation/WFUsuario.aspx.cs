@@ -1,4 +1,5 @@
 ﻿using Logic;
+using SimpleCrypto;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,7 +20,7 @@ namespace Presentation
         EmpleadoLog objEmp = new EmpleadoLog();
 
         private int _id, _fkrol, _fkempleado, _fkcliente;
-        private string _email, _password, _salt, _state;
+        private string _email, _password, _salt, _state, _encryptedPassword;
         private DateTime _Create_Date;
 
         private bool executed = false;
@@ -27,6 +28,7 @@ namespace Presentation
         {
             if (!IsPostBack)
             {
+                TBDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 //showUsuario();
                 showClienteDDL();
                 showEmpleadoDDL();
@@ -114,9 +116,8 @@ namespace Presentation
             HFUsuarioID.Value = "";
             TBEmail.Text = "";
             TBPassword.Text = "";
-            TBSalt.Text = "";
             DDLState.SelectedIndex = 0;
-            TBDate.Text = "";
+            TBDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             DDLRol.SelectedIndex = 0;
             DDLEmpleado.SelectedIndex = 0;
             DDLCliente.SelectedIndex = 0;
@@ -127,17 +128,24 @@ namespace Presentation
         //Eventos cuando se ejecutan al dar click en los botones
         protected void BtnSave_Click(object sender, EventArgs e)
         {
+            /*
+             * PBKDF2: Password-Based Key Derivation Function 2, es un algoritmo para proteger contraseñas,
+             * ya que es seguro contra ataques de fuerza bruta, genera un hash mediante múltiples iteraciones
+             */
+            ICryptoService cryptoService = new PBKDF2();
 
             _email = TBEmail.Text;
             _password = TBPassword.Text;
-            _salt = TBSalt.Text;
+            _salt = cryptoService.GenerateSalt();// Se generar un salt único para esa contraseña.
+            _encryptedPassword = cryptoService.Compute(_password);// Se generar un hash de la contraseña.
+
             _state = DDLState.SelectedValue;
-            _Create_Date = Convert.ToDateTime(TBDate.Text);
+            _Create_Date = DateTime.Parse(TBDate.Text);
             _fkrol = Convert.ToInt32(DDLRol.SelectedValue);
             _fkempleado = Convert.ToInt32(DDLEmpleado.SelectedValue);
             _fkcliente = Convert.ToInt32(DDLCliente.SelectedValue);
 
-            executed = objUsu.saveUsuario(_email, _password, _salt, _state, _Create_Date, _fkrol, _fkempleado, _fkcliente);
+            executed = objUsu.saveUsuario(_email, _encryptedPassword, _salt, _state, _Create_Date, _fkrol, _fkempleado, _fkcliente);
 
             
                 if (executed)
@@ -161,17 +169,23 @@ namespace Presentation
                 LblMsg.Text = "No se ha seleccionado un usuario para actualizar";
                 return;
             }
+
+            ICryptoService cryptoService = new PBKDF2();
+
             _id = Convert.ToInt32(HFUsuarioID.Value);
             _email = TBEmail.Text;
             _password = TBPassword.Text;
-            _salt = TBSalt.Text;
+            _salt = cryptoService.GenerateSalt();// Se generar un salt único para esa contraseña.
+            _encryptedPassword = cryptoService.Compute(_password);// Se generar un hash de la contraseña.
+
+
             _state = DDLState.SelectedValue;
-            _Create_Date = Convert.ToDateTime(TBDate.Text);
+            _Create_Date = DateTime.Parse(TBDate.Text);
             _fkrol = Convert.ToInt32(DDLRol.SelectedValue);
             _fkempleado = Convert.ToInt32(DDLEmpleado.SelectedValue);
             _fkcliente = Convert.ToInt32(DDLCliente.SelectedValue);
 
-            executed = objUsu.updateUsuario(_id,_email,_password,_salt,_state,_Create_Date,_fkrol,_fkempleado,_fkcliente);
+            executed = objUsu.updateUsuario(_id,_email, _encryptedPassword, _salt,_state,_Create_Date,_fkrol,_fkempleado,_fkcliente);
 
             if (executed)
             {
