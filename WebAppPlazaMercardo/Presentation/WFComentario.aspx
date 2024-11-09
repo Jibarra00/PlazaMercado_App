@@ -1,9 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="WFComentario.aspx.cs" Inherits="Presentation.WFComentario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <%-- Estilos --%>
+    <link href="resources/css/datatables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:TextBox ID="TBId" runat="server"></asp:TextBox>
+    <%-- Id --%>
+    <asp:HiddenField ID="HFCommentID" runat="server" />
+    <br />
     <%--Texto--%>
     <asp:Label ID="Label1" runat="server" Text="Ingrese el texto"></asp:Label>
     <asp:TextBox ID="TBText" runat="server"></asp:TextBox>
@@ -25,18 +29,118 @@
     <asp:DropDownList ID="DDLProducto" runat="server"></asp:DropDownList>
     <br />
 
-    <%-- Comentario --%>
-    <asp:Label ID="Label6" runat="server" Text="Seleccione el comentario"></asp:Label>
-    <asp:DropDownList ID="DDLComment" runat="server"></asp:DropDownList>
-
     <%-- Boton guardar --%>
     <div>
         <asp:Button ID="BtnSave" runat="server" Text="Guardar" OnClick="BtnSave_Click" />
+        <asp:Button ID="BtnUpdate" runat="server" Text="Actualizar" OnClick="BtnUpdate_Click" />
         <asp:Label ID="LblMsg" runat="server" Text=""></asp:Label>
     </div>
+<h2>Lista de Comentarios</h2>
+    <table id="commentsTable" class="display" style="width: 100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Texto</th>
+                <th>Fecha</th>
+                <th>Clasificación</th>
+                <th>Cliente</th>
+                <th>Producto</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 
-    <%-- Lista de comentarios --%>
-    <div>
-        <asp:GridView ID="GVComment" runat="server"></asp:GridView>
-    </div>
+    <script src="resources/js/datatables.min.js" type="text/javascript"></script>
+
+    <%--Comentarios--%>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#commentsTable').DataTable({
+                "processing": true,
+                "serverSide": false,
+                "ajax": {
+                    "url": "WFComentario.aspx/ListComments",// Se invoca el WebMethod Listar Productos
+                    "type": "POST",
+                    "contentType": "application/json",
+                    "data": function (d) {
+                        return JSON.stringify(d);// Convierte los datos a JSON
+                    },
+                    "dataSrc": function (json) {
+                        return json.d.data;// Obtiene la lista de productos del resultado
+                    }
+                },
+                "columns": [
+                    { "data": "CommentID" },
+                    { "data": "Text" },
+                    { "data": "Date" },
+                    { "data": "Classification" },
+                    { "data": "Client" },
+                    { "data": "Product" },
+                    {
+                        "data": null,
+                        "render": function (data, type, row) {
+                            return `<button class="edit-btn" data-id="${row.CommentID}">Editar</button>
+                              <button class="delete-btn" data-id="${row.CommentID}">Eliminar</button>`;
+                        }
+                    }
+                ],
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron resultados",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Último",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+
+            // Editar un producto
+            $('#commentsTable').on('click', '.edit-btn', function () {
+                //const id = $(this).data('id');
+                const rowData = $('#commentsTable').DataTable().row($(this).parents('tr')).data();
+                //alert(JSON.stringify(rowData, null, 2));
+                loadCommentData(rowData);
+            });
+
+            // Eliminar un producto
+            $('#commentsTable').on('click', '.delete-btn', function () {
+                const id = $(this).data('id');// Obtener el ID de la categoria
+                if (confirm("¿Estás seguro de que deseas eliminar este comentario?")) {
+                    deleteComment(id);// Invoca a la función para eliminar el producto
+                }
+            });
+        });
+        // Cargar los datos en los TextBox y DDL para actualizar
+        function loadCommentData(rowData) {
+            $('#<%= HFCommentID.ClientID %>').val(rowData.CommentID);
+            $('#<%= TBText.ClientID %>').val(rowData.Text);
+            $('#<%= TBClassification.ClientID %>').val(rowData.Classification);
+            $('#<%= TBDate.ClientID %>').val(rowData.Date);
+            $('#<%= DDLClient.ClientID %>').val(rowData.Client);
+            $('#<%= DDLProducto.ClientID %>').val(rowData.Product);
+        }
+        // Función para eliminar un producto
+        function deleteComment(id) {
+            $.ajax({
+                type: "POST",
+                url: "WFComentario.aspx/DeleteComment",// Se invoca el WebMethod Eliminar un Producto
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ id: id }),
+                success: function (response) {
+                    $('#commentsTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
+                    alert("Comentario eliminada exitosamente.");
+                },
+                error: function () {
+                    alert("Error al eliminar el comentario.");
+                }
+            });
+        }
+    </script>
 </asp:Content>
