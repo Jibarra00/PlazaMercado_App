@@ -15,6 +15,15 @@ namespace Presentation
     {
 
         /// <summary>
+        /// Control HFPedidosID.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HFPedidosID;
+
+        /// <summary>
         /// Control Label1.
         /// </summary>
         /// <remarks>
@@ -42,13 +51,13 @@ namespace Presentation
         protected global::System.Web.UI.WebControls.Label Label2;
 
         /// <summary>
-        /// Control TBEstado.
+        /// Control DDLEstado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TBEstado;
+        protected global::System.Web.UI.WebControls.DropDownList DDLEstado;
 
         /// <summary>
         /// Control Label3.
@@ -130,14 +139,5 @@ namespace Presentation
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LblMsg;
-
-        /// <summary>
-        /// Control GVPedidos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GVPedidos;
     }
 }

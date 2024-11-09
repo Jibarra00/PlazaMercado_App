@@ -97,10 +97,10 @@ namespace Data
 
             // Se agregan parámetros al comando para pasar los valores del pedido.
             objSelectCmd.Parameters.Add("p_id", MySqlDbType.Int32).Value = _id;
-            objSelectCmd.Parameters.Add("p_date", MySqlDbType.VarString).Value = _date;
+            objSelectCmd.Parameters.Add("p_date", MySqlDbType.DateTime).Value = _date;
             objSelectCmd.Parameters.Add("p_state", MySqlDbType.VarString).Value = _state;
-            objSelectCmd.Parameters.Add("p_specification", MySqlDbType.Int32).Value = _specification;
-            objSelectCmd.Parameters.Add("fkcliente", MySqlDbType.Double).Value = _fkCliente;
+            objSelectCmd.Parameters.Add("p_specification", MySqlDbType.VarString).Value = _specification;
+            objSelectCmd.Parameters.Add("fkcliente", MySqlDbType.Int32).Value = _fkCliente;
             objSelectCmd.Parameters.Add("fkproducto", MySqlDbType.Int32).Value = _fkproducto;
 
             try
