@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -24,19 +25,56 @@ namespace Presentation
         {
             if (!IsPostBack)
             {
-                
-                showProductos();
+
+                //showProductos();
                 showCategoriaDDL();
                 showProvedoresDDL();
             }
         }
-        private void showProductos()
+        /*
+         * Atributo [WebMethod] en ASP.NET, permite que el método sea expuesto como 
+         * parte de un servicio web, lo que significa que puede ser invocado de manera
+         * remota a través de HTTP.
+         */
+        //lista de productos
+        [WebMethod]
+        public static object ListProducts()
         {
-            DataSet ds = new DataSet();
-            ds = objProd.showProducts();
-            GVProductos.DataSource = ds;
-            GVProductos.DataBind();
+            ProductoLog objProd = new ProductoLog();
+
+            var dataSet = objProd.showProducts();
+
+            var productsList = new List<object>();
+
+            foreach (DataRow row in dataSet.Tables[0].Rows)
+            {
+                productsList.Add(new
+                {
+                    ProductID = row["pro_id"],
+                    Code = row["pro_codigo"],
+                    Description = row["pro_descripcion"],
+                    Quantity = row["pro_cantidad"],
+                    Price = row["pro_precio"],
+                    FkCategory = row["tbl_categoria_cat_id"],
+                    NameCategory = row["cat_descripcion"],
+                    FkProvider = row["tbl_proveedor_prov_id"],
+                    NameProvider = row["prov_nombre"]
+
+                });
+            }
+            return new { data = productsList };
+            //eliminar producto
         }
+
+        
+
+        [WebMethod]
+        public static bool DeleteProduct(int id)
+        {
+            ProductoLog objProd = new ProductoLog();
+            return objProd.deleteProducto(id);
+        }
+
         private void showProvedoresDDL()
         {
             DDLProveedor.DataSource = objPro.showProveedorDDL();
@@ -54,6 +92,18 @@ namespace Presentation
             DDLCategoria.Items.Insert(0, "Seleccione la categoria");
         }
 
+        //Metodo para limpiar los texbox  y los DDL
+        private void clear()
+        {
+            HFProductoID.Value = "";
+            TBCodigo.Text = "";
+            TBDescripcion.Text = "";
+            TBCantidad.Text = "";
+            TBPrecio.Text = "";
+            DDLCategoria.SelectedIndex = 0;
+            DDLProveedor.SelectedIndex = 0;
+        }
+
         protected void BTnSave_Click(object sender, EventArgs e)
         {
             _code = TBCodigo.Text;
@@ -69,12 +119,43 @@ namespace Presentation
             if (executed)
             {
                 LblMsg.Text = "Se guardo el producto";
-                showProductos();
+                clear();
             }
             else
             {
                 LblMsg.Text = "Error al guardar";
             }
         }
+        protected void BTnUpdate_Click(object sender, EventArgs e)
+        {
+            //verifica si se ha seleccionado un prodcuto para actualizar
+            if (string.IsNullOrEmpty(HFProductoID.Value))
+            {
+                LblMsg.Text = "No se ha seleccionado un producto para actualizar";
+                return;
+            }
+
+            _id = Convert.ToInt32(HFProductoID.Value);
+            _code = TBCodigo.Text;
+            _description = TBDescripcion.Text;
+            _quantity = Convert.ToInt32(TBCantidad.Text);
+            _price = Convert.ToDouble(TBPrecio.Text);
+            _fkCategory = Convert.ToInt32(DDLCategoria.Text);
+            _fkProvider = Convert.ToInt32(DDLProveedor.Text);
+
+            executed = objProd.updateProducts(_id, _code, _description, _quantity, _price, _fkCategory, _fkProvider);
+
+            if (executed)
+            {
+                LblMsg.Text = "Se actualizo el producto";
+                clear();
+            }
+            else
+            {
+                LblMsg.Text = "Error al actualizar";
+            }
+        }
+
+
     }
 }
