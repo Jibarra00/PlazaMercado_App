@@ -111,6 +111,7 @@ namespace Data
             objSelectCmd.CommandType = CommandType.StoredProcedure;
 
             // Se agregan parámetros al comando para pasar los valores del rol.
+            objSelectCmd.Parameters.Add("r_id", MySqlDbType.Int32).Value = _id;
             objSelectCmd.Parameters.Add("r_nombre", MySqlDbType.VarString).Value = _nombre;
             objSelectCmd.Parameters.Add("r_description", MySqlDbType.VarString).Value = _description;
 
