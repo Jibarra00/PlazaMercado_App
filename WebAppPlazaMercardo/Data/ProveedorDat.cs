@@ -110,9 +110,9 @@ namespace Data
             objSelectCmd.CommandType = CommandType.StoredProcedure;
 
             // Se agregan parámetros al comando para pasar los valores del proveedor.
-            objSelectCmd.Parameters.Add("p_id", MySqlDbType.VarString).Value = _id;
+            objSelectCmd.Parameters.Add("p_id", MySqlDbType.Int32).Value = _id;
             objSelectCmd.Parameters.Add("p_nit", MySqlDbType.VarString).Value = _nit;
-            objSelectCmd.Parameters.Add("p_nombre", MySqlDbType.Int32).Value = _nombre;
+            objSelectCmd.Parameters.Add("p_nombre", MySqlDbType.VarString).Value = _nombre;
 
             try
             {
