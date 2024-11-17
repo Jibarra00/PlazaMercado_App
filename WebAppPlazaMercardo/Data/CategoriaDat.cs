@@ -34,7 +34,7 @@ namespace Data
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spSelectCategoriesDDL";
+            objSelectCmd.CommandText = "spSelectCategoryDDL";
             objSelectCmd.CommandType = CommandType.StoredProcedure;
             objAdapter.SelectCommand = objSelectCmd;
             objAdapter.Fill(objData);
@@ -52,7 +52,7 @@ namespace Data
             objSelectCmd.Connection = objPer.openConnection();
             objSelectCmd.CommandText = "spInsertCategory"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
-            objSelectCmd.Parameters.Add("p_cat_descripcion", MySqlDbType.VarString).Value = _description;
+            objSelectCmd.Parameters.Add("c_descripcion", MySqlDbType.VarString).Value = _description;
 
 
             try
@@ -82,8 +82,8 @@ namespace Data
             objSelectCmd.Connection = objPer.openConnection();
             objSelectCmd.CommandText = "spUpdateCategory"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
-            objSelectCmd.Parameters.Add("cat_id", MySqlDbType.Int32).Value = _idCategory;
-            objSelectCmd.Parameters.Add("cat_descripcion", MySqlDbType.VarString).Value = _description;
+            objSelectCmd.Parameters.Add("c_id", MySqlDbType.Int32).Value = _idCategory;
+            objSelectCmd.Parameters.Add("c_descripcion", MySqlDbType.VarString).Value = _description;
 
             try
             {
@@ -112,7 +112,7 @@ namespace Data
             objSelectCmd.Connection = objPer.openConnection();
             objSelectCmd.CommandText = "spDeleteCategory"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
-            objSelectCmd.Parameters.Add("cat_id", MySqlDbType.Int32).Value = _idCategory;
+            objSelectCmd.Parameters.Add("c_id", MySqlDbType.Int32).Value = _idCategory;
 
             try
             {

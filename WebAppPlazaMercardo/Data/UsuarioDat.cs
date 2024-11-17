@@ -72,7 +72,7 @@ namespace Data
         }
 
         //Metodo para guardar un nuevo Usuario
-        public bool saveUsuario(string _email,string _password, string _salt, string _state, DateTime _Create_Date, int _fkrol, int _fkempleado, int _fkcliente)
+        public bool saveUsuario(string _email,string _password, string _salt, string _state, DateTime _Create_Date, int _fkrol, int _fkempleado)
         {
             // Se inicializa una variable para indicar si la operación se ejecutó correctamente.
             bool executed = false;
@@ -92,7 +92,6 @@ namespace Data
             objSelectCmd.Parameters.Add("u_create_date", MySqlDbType.Datetime).Value = _Create_Date;
             objSelectCmd.Parameters.Add("fkrol", MySqlDbType.Int32).Value = _fkrol;
             objSelectCmd.Parameters.Add("fkempleado", MySqlDbType.Int32).Value = _fkempleado;
-            objSelectCmd.Parameters.Add("fkcliente", MySqlDbType.Int32).Value = _fkcliente;
 
 
             try
@@ -116,7 +115,7 @@ namespace Data
             return executed;
         }
         //Metodo para actulizar un usuario
-        public bool updateUsuario(int _id, string _email, string _password, string _salt, string _state, DateTime _Create_Date, int _fkrol, int _fkempleado, int _fkcliente)
+        public bool updateUsuario(int _id, string _email, string _password, string _salt, string _state, DateTime _Create_Date, int _fkrol, int _fkempleado)
         {
             bool executed = false;
             int row;
@@ -135,7 +134,6 @@ namespace Data
             objSelectCmd.Parameters.Add("u_create_date", MySqlDbType.DateTime).Value = _Create_Date;
             objSelectCmd.Parameters.Add("fkrol", MySqlDbType.Int32).Value = _fkrol;
             objSelectCmd.Parameters.Add("fkempleado", MySqlDbType.Int32).Value = _fkempleado;
-            objSelectCmd.Parameters.Add("fkcliente", MySqlDbType.Int32).Value = _fkcliente;
 
             try
             {

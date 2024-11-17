@@ -52,10 +52,10 @@ namespace Data
             objSelectCmd.Connection = objPer.openConnection();
             objSelectCmd.CommandText = "spInsertManagement"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
-            objSelectCmd.Parameters.Add("p_ges_fecha", MySqlDbType.DateTime).Value = p_ges_fecha;
-            objSelectCmd.Parameters.Add("p_ges_descripcion", MySqlDbType.VarString).Value = p_ges_descripcion;
-            objSelectCmd.Parameters.Add("p_tbl_empleado_emp_id", MySqlDbType.Int32).Value = _fkemployee;
-            objSelectCmd.Parameters.Add("p_tbl_producto_pro_id", MySqlDbType.Int32).Value = _fkproduct;
+            objSelectCmd.Parameters.Add("g_fecha", MySqlDbType.DateTime).Value = p_ges_fecha;
+            objSelectCmd.Parameters.Add("g_descripcion", MySqlDbType.VarString).Value = p_ges_descripcion;
+            objSelectCmd.Parameters.Add("tbl_empleado_emp_id", MySqlDbType.Int32).Value = _fkemployee;
+            objSelectCmd.Parameters.Add("tbl_producto_pro_id", MySqlDbType.Int32).Value = _fkproduct;
 
 
 
@@ -86,9 +86,9 @@ namespace Data
             objSelectCmd.Connection = objPer.openConnection();
             objSelectCmd.CommandText = "spUpdateManagement"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
-            objSelectCmd.Parameters.Add("ges_id", MySqlDbType.Int32).Value = p_ges_id;
-            objSelectCmd.Parameters.Add("ges_fecha", MySqlDbType.DateTime).Value = p_ges_fecha;
-            objSelectCmd.Parameters.Add("ges_descripcion", MySqlDbType.VarString).Value = p_ges_descripcion;
+            objSelectCmd.Parameters.Add("g_id", MySqlDbType.Int32).Value = p_ges_id;
+            objSelectCmd.Parameters.Add("g_fecha", MySqlDbType.DateTime).Value = p_ges_fecha;
+            objSelectCmd.Parameters.Add("g_descripcion", MySqlDbType.VarString).Value = p_ges_descripcion;
 
 
             try
@@ -118,7 +118,7 @@ namespace Data
             objSelectCmd.Connection = objPer.openConnection();
             objSelectCmd.CommandText = "spDeleteManagement"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
-            objSelectCmd.Parameters.Add("ges_id", MySqlDbType.Int32).Value = p_ges_id;
+            objSelectCmd.Parameters.Add("g_id", MySqlDbType.Int32).Value = p_ges_id;
 
             try
             {

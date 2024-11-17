@@ -23,15 +23,15 @@ namespace Logic
         {
             return objUsu.showUserEmail(mail);
         }
-        public bool saveUsuario(string _email, string _password, string _salt, string _state, DateTime _Create_Date, int _fkrol, int _fkempleado, int _fkcliente)
+        public bool saveUsuario(string _email, string _password, string _salt, string _state, DateTime _Create_Date, int _fkrol, int _fkempleado)
         {
            
-            return objUsu.saveUsuario(_email, _password, _salt, _state, _Create_Date, _fkrol, _fkempleado, _fkcliente);
+            return objUsu.saveUsuario(_email, _password, _salt, _state, _Create_Date, _fkrol, _fkempleado);
         }
-        public bool updateUsuario(int _id, string _email, string _password, string _salt, string _state, DateTime _Create_Date, int _fkrol, int _fkempleado, int _fkcliente)
+        public bool updateUsuario(int _id, string _email, string _password, string _salt, string _state, DateTime _Create_Date, int _fkrol, int _fkempleado)
         {
             
-            return objUsu.updateUsuario(_id,_email, _password, _salt, _state, _Create_Date, _fkrol, _fkempleado, _fkcliente);
+            return objUsu.updateUsuario(_id,_email, _password, _salt, _state, _Create_Date, _fkrol, _fkempleado);
         }
         public bool deleteUsuario(int _idUsuario)
         {

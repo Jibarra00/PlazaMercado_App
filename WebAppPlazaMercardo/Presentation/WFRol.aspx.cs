@@ -77,7 +77,7 @@ namespace Presentation
         {
             HFRolID.Value = "";
             TBNombre.Text = "";
-            TBdescripcion.Text = "";
+            TBDescripcion.Text = "";
         }
 
         
@@ -88,9 +88,9 @@ namespace Presentation
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             _nombre = TBNombre.Text;
-            _descripcion = TBdescripcion.Text;
+            _descripcion = TBDescripcion.Text;
 
-            executed = objRol.saveRol(_nombre, _descripcion);
+            executed = objRol.saveRol(_nombre,_descripcion);
 
             if (executed)
             {
@@ -114,7 +114,7 @@ namespace Presentation
             }
             _id = Convert.ToInt32(HFRolID.Value);
             _nombre = TBNombre.Text;
-            _descripcion = TBdescripcion.Text ;
+            _descripcion = TBDescripcion.Text ;
 
             executed = objRol.updateRol(_id, _nombre, _descripcion);
 

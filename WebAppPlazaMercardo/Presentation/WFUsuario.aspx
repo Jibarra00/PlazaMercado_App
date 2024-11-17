@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <%--Estilos--%>
-    <link href="resourse/css/datatables.min.css" rel="stylesheet" />
+    <link href="resources/css/datatables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form>
@@ -36,10 +36,6 @@
         <asp:Label ID="Label7" runat="server" Text="Seleccione el empleado"></asp:Label>
         <asp:DropDownList ID="DDLEmpleado" runat="server"></asp:DropDownList>
         <br />
-        <%--CLIENTE--%>
-        <asp:Label ID="Label8" runat="server" Text="Seleccione el cliente"></asp:Label>
-        <asp:DropDownList ID="DDLCliente" runat="server"></asp:DropDownList>
-        <br />
 
         <%--BOTON DE GUARDAR Y ACTUALIZAR--%>
         <div>
@@ -66,8 +62,6 @@
                 <th>Rol</th>
                 <th>FkEmpleado</th>
                 <th>Empleado</th>
-                <th>FkCliente</th>
-                <th>Cliente</th>
             </tr>
         </thead>
         <tbody>
@@ -106,8 +100,7 @@
                     { "data": "nameRol" },
                     { "data": "FkEmpleado", "visible": false },
                     { "data": "nameEmpleado" },
-                    { "data": "FkCliente", "visible": false },
-                    { "data": "nameCliente" },
+
                     {
                         "data": null,
                         "render": function (row) {
@@ -154,12 +147,12 @@
         function loadUsuarioData(rowData) {
             $('#<%= HFUsuarioID.ClientID %>').val(rowData.UsuarioID);
             $('#<%= TBEmail.ClientID %>').val(rowData.Correo);
-            
+
             $('#<%= DDLState.ClientID %>').val(rowData.Estado);
             $('#<%= TBDate.ClientID %>').val(rowData.Fecha_creacion);
             $('#<%= DDLRol.ClientID %>').val(rowData.FkRol);
             $('#<%= DDLEmpleado.ClientID %>').val(rowData.FkEmpleado);
-            $('#<%= DDLCliente.ClientID %>').val(rowData.FkCliente);
+
         }
 
         // Función para eliminar un producto

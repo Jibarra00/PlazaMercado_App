@@ -26,7 +26,7 @@ namespace Data
             objSelectCmd.Connection = objPer.openConnection();
 
             // Se especifica el nombre del procedimiento almacenado a ejecutar.
-            objSelectCmd.CommandText = "spSelectPedidos";
+            objSelectCmd.CommandText = "spSelectOrders";
 
             // Se indica que se trata de un procedimiento almacenado.
             objSelectCmd.CommandType = CommandType.StoredProcedure;
@@ -53,13 +53,13 @@ namespace Data
             // Se crea un comando MySQL para insertar un nuevo pedido utilizando un procedimiento almacenado.
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spInsertPedidos"; //nombre del procedimiento almacenado
+            objSelectCmd.CommandText = "spInsertOrders"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
 
             // Se agregan parámetros al comando para pasar los valores del pedido.
-            objSelectCmd.Parameters.Add("p_date", MySqlDbType.Datetime).Value = _date;
-            objSelectCmd.Parameters.Add("p_state", MySqlDbType.VarString).Value = _state;
-            objSelectCmd.Parameters.Add("p_specification", MySqlDbType.VarString).Value = _specification;
+            objSelectCmd.Parameters.Add("p_fecha", MySqlDbType.Datetime).Value = _date;
+            objSelectCmd.Parameters.Add("p_estado", MySqlDbType.VarString).Value = _state;
+            objSelectCmd.Parameters.Add("p_especificacion", MySqlDbType.VarString).Value = _specification;
             objSelectCmd.Parameters.Add("fkcliente", MySqlDbType.Int32).Value = _fkCliente;
             objSelectCmd.Parameters.Add("fkproducto", MySqlDbType.Int32).Value = _fkproducto;
 
@@ -92,14 +92,14 @@ namespace Data
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spUpdatePedidos"; //nombre del procedimiento almacenado
+            objSelectCmd.CommandText = "spUpdateOrders"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
 
             // Se agregan parámetros al comando para pasar los valores del pedido.
             objSelectCmd.Parameters.Add("p_id", MySqlDbType.Int32).Value = _id;
-            objSelectCmd.Parameters.Add("p_date", MySqlDbType.DateTime).Value = _date;
-            objSelectCmd.Parameters.Add("p_state", MySqlDbType.VarString).Value = _state;
-            objSelectCmd.Parameters.Add("p_specification", MySqlDbType.VarString).Value = _specification;
+            objSelectCmd.Parameters.Add("p_fecha", MySqlDbType.DateTime).Value = _date;
+            objSelectCmd.Parameters.Add("p_estado", MySqlDbType.VarString).Value = _state;
+            objSelectCmd.Parameters.Add("p_especificacion", MySqlDbType.VarString).Value = _specification;
             objSelectCmd.Parameters.Add("fkcliente", MySqlDbType.Int32).Value = _fkCliente;
             objSelectCmd.Parameters.Add("fkproducto", MySqlDbType.Int32).Value = _fkproducto;
 
@@ -126,7 +126,7 @@ namespace Data
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spDeletePedidos"; //nombre del procedimiento almacenado
+            objSelectCmd.CommandText = "spDeleteOrders"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
             objSelectCmd.Parameters.Add("p_id", MySqlDbType.Int32).Value = _idPedidos;
 

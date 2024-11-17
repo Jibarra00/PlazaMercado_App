@@ -28,7 +28,7 @@ namespace Data
             objSelectCmd.Connection = objPer.openConnection();
 
             // Se especifica el nombre del procedimiento almacenado a ejecutar.
-            objSelectCmd.CommandText = "spSelectPermiso";
+            objSelectCmd.CommandText = "spSelectPermission";
 
             // Se indica que se trata de un procedimiento almacenado.
             objSelectCmd.CommandType = CommandType.StoredProcedure;
@@ -55,12 +55,12 @@ namespace Data
             // Se crea un comando MySQL para insertar un nuevo permiso utilizando un procedimiento almacenado.
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spInsertPermiso"; //nombre del procedimiento almacenado
+            objSelectCmd.CommandText = "spInsertPermission"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
 
             // Se agregan parámetros al comando para pasar los valores del permiso.
-            objSelectCmd.Parameters.Add("p_name", MySqlDbType.VarString).Value = _name;
-            objSelectCmd.Parameters.Add("p_description", MySqlDbType.VarString).Value = _description;
+            objSelectCmd.Parameters.Add("p_nombre", MySqlDbType.VarString).Value = _name;
+            objSelectCmd.Parameters.Add("p_descripcion", MySqlDbType.VarString).Value = _description;
 
 
             try
@@ -92,13 +92,13 @@ namespace Data
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spUpdatePermiso"; //nombre del procedimiento almacenado
+            objSelectCmd.CommandText = "spUpdatePermission"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
 
             // Se agregan parámetros al comando para pasar los valores del permiso.
             objSelectCmd.Parameters.Add("p_id", MySqlDbType.Int32).Value = _id;
-            objSelectCmd.Parameters.Add("p_name", MySqlDbType.VarString).Value = _name;
-            objSelectCmd.Parameters.Add("p_description", MySqlDbType.VarString).Value = _description;
+            objSelectCmd.Parameters.Add("p_nombre", MySqlDbType.VarString).Value = _name;
+            objSelectCmd.Parameters.Add("p_descripcion", MySqlDbType.VarString).Value = _description;
 
 
             try
@@ -124,7 +124,7 @@ namespace Data
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spDeletePermiso"; //nombre del procedimiento almacenado
+            objSelectCmd.CommandText = "spDeletePermission"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
             objSelectCmd.Parameters.Add("p_id", MySqlDbType.Int32).Value = _idPermiso;
 

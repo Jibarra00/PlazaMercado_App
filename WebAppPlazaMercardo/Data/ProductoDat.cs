@@ -77,10 +77,10 @@ namespace Data
             objSelectCmd.CommandType = CommandType.StoredProcedure;
 
             // Se agregan parámetros al comando para pasar los valores del producto.
-            objSelectCmd.Parameters.Add("p_code", MySqlDbType.VarString).Value = _code;
-            objSelectCmd.Parameters.Add("p_description", MySqlDbType.VarString).Value = _description;
-            objSelectCmd.Parameters.Add("p_amount", MySqlDbType.Int32).Value = _quantity;
-            objSelectCmd.Parameters.Add("p_price", MySqlDbType.Double).Value = _price;
+            objSelectCmd.Parameters.Add("p_codigo", MySqlDbType.VarString).Value = _code;
+            objSelectCmd.Parameters.Add("p_descripcion", MySqlDbType.VarString).Value = _description;
+            objSelectCmd.Parameters.Add("p_cantidad", MySqlDbType.Int32).Value = _quantity;
+            objSelectCmd.Parameters.Add("p_precio", MySqlDbType.Double).Value = _price;
             objSelectCmd.Parameters.Add("p_fkcategory", MySqlDbType.Int32).Value = _fkCategory;
             objSelectCmd.Parameters.Add("p_fkprovider", MySqlDbType.Int32).Value = _fkProvider;
 
@@ -118,10 +118,10 @@ namespace Data
 
             // Se agregan parámetros al comando para pasar los valores del producto.
             objSelectCmd.Parameters.Add("p_id", MySqlDbType.Int32).Value = _id;
-            objSelectCmd.Parameters.Add("p_code", MySqlDbType.VarString).Value = _code;
-            objSelectCmd.Parameters.Add("p_description", MySqlDbType.VarString).Value = _description;
-            objSelectCmd.Parameters.Add("p_amount", MySqlDbType.Int32).Value = _quantity;
-            objSelectCmd.Parameters.Add("p_price", MySqlDbType.Double).Value = _price;
+            objSelectCmd.Parameters.Add("p_codigo", MySqlDbType.VarString).Value = _code;
+            objSelectCmd.Parameters.Add("p_descripcion", MySqlDbType.VarString).Value = _description;
+            objSelectCmd.Parameters.Add("p_cantidad", MySqlDbType.Int32).Value = _quantity;
+            objSelectCmd.Parameters.Add("p_precio", MySqlDbType.Double).Value = _price;
             objSelectCmd.Parameters.Add("p_fkcategory", MySqlDbType.Int32).Value = _fkCategory;
             objSelectCmd.Parameters.Add("p_fkprovider", MySqlDbType.Int32).Value = _fkProvider;
 

@@ -19,7 +19,7 @@ namespace Presentation
         RolLog objRol = new RolLog();
         EmpleadoLog objEmp = new EmpleadoLog();
 
-        private int _id, _fkrol, _fkempleado, _fkcliente;
+        private int _id, _fkrol, _fkempleado;
         private string _email, _password, _salt, _state, _encryptedPassword;
         private DateTime _Create_Date;
 
@@ -30,7 +30,7 @@ namespace Presentation
             {
                 TBDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 //showUsuario();
-                showClienteDDL();
+                
                 showEmpleadoDDL();
                 showRolDDL();
             }
@@ -65,8 +65,7 @@ namespace Presentation
                     nameRol = row["rol_nombre"],
                     FkEmpleado = row["tbl_empleado_emp_id"],
                     nameEmpleado = row["emp_nombres"],
-                    FkCliente = row["tbl_cliente_cli_id"],
-                    nameCliente = row["cli_nombres"]
+                    
                 });
             }
             // Devuelve un objeto en formato JSON que contiene la lista de usuarios.
@@ -85,14 +84,7 @@ namespace Presentation
             return objUsu.deleteUsuario(id);
 
         }
-        private void showClienteDDL()
-        {
-            DDLCliente.DataSource = objCli.showClientDDL();
-            DDLCliente.DataValueField = "cli_id";
-            DDLCliente.DataTextField = "cli_nombres";
-            DDLCliente.DataBind();
-            DDLCliente.Items.Insert(0, "Seleccione cliente");
-        }
+        
         private void showRolDDL()
         {
             DDLRol.DataSource = objRol.showrolDDL();
@@ -120,7 +112,6 @@ namespace Presentation
             TBDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             DDLRol.SelectedIndex = 0;
             DDLEmpleado.SelectedIndex = 0;
-            DDLCliente.SelectedIndex = 0;
             
         }
 
@@ -143,9 +134,8 @@ namespace Presentation
             _Create_Date = DateTime.Parse(TBDate.Text);
             _fkrol = Convert.ToInt32(DDLRol.SelectedValue);
             _fkempleado = Convert.ToInt32(DDLEmpleado.SelectedValue);
-            _fkcliente = Convert.ToInt32(DDLCliente.SelectedValue);
 
-            executed = objUsu.saveUsuario(_email, _encryptedPassword, _salt, _state, _Create_Date, _fkrol, _fkempleado, _fkcliente);
+            executed = objUsu.saveUsuario(_email, _encryptedPassword, _salt, _state, _Create_Date, _fkrol, _fkempleado);
 
             
                 if (executed)
@@ -183,9 +173,8 @@ namespace Presentation
             _Create_Date = DateTime.Parse(TBDate.Text);
             _fkrol = Convert.ToInt32(DDLRol.SelectedValue);
             _fkempleado = Convert.ToInt32(DDLEmpleado.SelectedValue);
-            _fkcliente = Convert.ToInt32(DDLCliente.SelectedValue);
 
-            executed = objUsu.updateUsuario(_id,_email, _encryptedPassword, _salt,_state,_Create_Date,_fkrol,_fkempleado,_fkcliente);
+            executed = objUsu.updateUsuario(_id,_email, _encryptedPassword, _salt,_state,_Create_Date,_fkrol,_fkempleado);
 
             if (executed)
             {

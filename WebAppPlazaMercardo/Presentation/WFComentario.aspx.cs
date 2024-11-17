@@ -103,7 +103,7 @@ namespace Presentation
             _fkclient = Convert.ToInt32(DDLClient.SelectedValue);
             _fkproduct = Convert.ToInt32(DDLProducto.SelectedValue);
 
-            executed = objco.updateComment(p_com_id, p_com_clasificacion, p_com_text, p_com_fecha, _fkclient, _fkproduct);
+            executed = objco.updateComment(p_com_id,p_com_clasificacion,p_com_text,p_com_fecha);
             if (executed)
             {
                 LblMsg.Text = "El comentario se actualizó exitosamente!";
@@ -120,7 +120,7 @@ namespace Presentation
         {
             DDLProducto.DataSource = objpro.showProductoDDL();
             DDLProducto.DataValueField = "pro_id"; //Nombre de la llave primaria
-            DDLProducto.DataTextField = "pro_descripcion";
+            DDLProducto.DataTextField = "codigoDescripcion";
             DDLProducto.DataBind();
             DDLProducto.Items.Insert(0, "Seleccione");
         }

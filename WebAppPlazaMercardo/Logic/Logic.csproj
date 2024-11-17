@@ -95,6 +95,10 @@
       <Project>{4956b168-0adb-4006-a1df-0fbbb3f85031}</Project>
       <Name>Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{2b939389-f037-4c6d-b476-1f4c0fe23f2d}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
