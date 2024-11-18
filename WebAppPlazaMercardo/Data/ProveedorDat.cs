@@ -20,7 +20,7 @@ namespace Data
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spSelectProveedorDDL";
+            objSelectCmd.CommandText = "spSelectProviderDDL";
             objSelectCmd.CommandType = CommandType.StoredProcedure;
             objAdapter.SelectCommand = objSelectCmd;
             objAdapter.Fill(objData);
@@ -42,7 +42,7 @@ namespace Data
             objSelectCmd.Connection = objPer.openConnection();
 
             // Se especifica el nombre del procedimiento almacenado a ejecutar.
-            objSelectCmd.CommandText = "spSelectproveedor";
+            objSelectCmd.CommandText = "spSelectProvider";
 
             // Se indica que se trata de un procedimiento almacenado.
             objSelectCmd.CommandType = CommandType.StoredProcedure;
@@ -69,7 +69,7 @@ namespace Data
             // Se crea un comando MySQL para insertar un nuevo proveedor utilizando un procedimiento almacenado.
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spInsertProveedor"; //nombre del procedimiento almacenado
+            objSelectCmd.CommandText = "spInsertProvider"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
 
             // Se agregan parámetros al comando para pasar los valores del proveedor.
@@ -106,7 +106,7 @@ namespace Data
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spUpdateProveedor"; //nombre del procedimiento almacenado
+            objSelectCmd.CommandText = "spUpdateProvider"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
 
             // Se agregan parámetros al comando para pasar los valores del proveedor.
@@ -137,7 +137,7 @@ namespace Data
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spDeleteproveedor"; //nombre del procedimiento almacenado
+            objSelectCmd.CommandText = "spDeleteProvider"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
             objSelectCmd.Parameters.Add("p_id", MySqlDbType.Int32).Value = _idProveedor;
 

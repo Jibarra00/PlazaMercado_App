@@ -17,7 +17,7 @@
         <br />
         <%--descripción--%>
         <asp:Label ID="Label2" runat="server" Text="Ingrese la descripción"></asp:Label>
-        <asp:TextBox ID="TBdescripcion" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TBDescripcion" runat="server"></asp:TextBox>
         <br />
 
         <%--botones de guardar y actualizar--%>
@@ -115,7 +115,7 @@
         function loadRolData(rowData) {
             $('#<%= HFRolID.ClientID %>').val(rowData.rolID);
             $('#<%= TBNombre.ClientID %>').val(rowData.Nombre);
-            $('#<%= TBdescripcion.ClientID %>').val(rowData.Descripcion);
+            $('#<%= TBDescripcion.ClientID %>').val(rowData.Descripcion);
 
         }
         // Función para eliminar un rol

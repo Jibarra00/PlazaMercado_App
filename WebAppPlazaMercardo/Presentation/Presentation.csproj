@@ -46,6 +46,9 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SimpleCrypto, Version=26.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleCrypto.0.3.30.26\lib\SimpleCrypto.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -65,6 +68,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="Default.aspx" />
+    <Content Include="resources\css\datatables.css" />
+    <Content Include="resources\css\datatables.min.css" />
+    <Content Include="resources\js\datatables.js" />
+    <Content Include="resources\js\datatables.min.js" />
     <Content Include="Web.config" />
     <Content Include="WFCategoria.aspx" />
     <Content Include="WFCliente.aspx" />
@@ -80,6 +88,13 @@
     <Content Include="WFUsuario.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Main.Master.cs">
       <DependentUpon>Main.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -192,6 +207,10 @@
     <ProjectReference Include="..\Logic\Logic.csproj">
       <Project>{9d3b121a-b8b0-40c1-ab5e-8205a5a76520}</Project>
       <Name>Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{2b939389-f037-4c6d-b476-1f4c0fe23f2d}</Project>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -90,7 +90,7 @@ namespace Presentation
             EmpleadoLog objEmp = new EmpleadoLog();
 
             // Invocar al método para eliminar el producto y devolver el resultado
-            return objEmp.deleteEmployee(id);
+            return objEmp.deleteClient(id);
         }
 
         private void clear()

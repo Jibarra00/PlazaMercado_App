@@ -88,12 +88,12 @@ namespace Data
             objSelectCmd.Connection = objPer.openConnection();
             objSelectCmd.CommandText = "spUpdateEmployee"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
-            objSelectCmd.Parameters.Add("emp_id", MySqlDbType.Int32).Value = e_id;
-            objSelectCmd.Parameters.Add("emp_identificacion", MySqlDbType.VarString).Value = e_identification;
-            objSelectCmd.Parameters.Add("emp_nombres", MySqlDbType.VarString).Value = e_names;
-            objSelectCmd.Parameters.Add("emp_apellidos", MySqlDbType.VarString).Value = e_lastnames;
-            objSelectCmd.Parameters.Add("emp_telefono", MySqlDbType.VarString).Value = e_phone;
-            objSelectCmd.Parameters.Add("emp_direccion", MySqlDbType.VarString).Value = e_addres;
+            objSelectCmd.Parameters.Add("e_id", MySqlDbType.Int32).Value = e_id;
+            objSelectCmd.Parameters.Add("e_identification", MySqlDbType.VarString).Value = e_identification;
+            objSelectCmd.Parameters.Add("e_names", MySqlDbType.VarString).Value = e_names;
+            objSelectCmd.Parameters.Add("e_lastnames", MySqlDbType.VarString).Value = e_lastnames;
+            objSelectCmd.Parameters.Add("e_phone", MySqlDbType.VarString).Value = e_phone;
+            objSelectCmd.Parameters.Add("e_addres", MySqlDbType.VarString).Value = e_addres;
 
             try
             {
@@ -120,9 +120,9 @@ namespace Data
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spDeleteClient"; //nombre del procedimiento almacenado
+            objSelectCmd.CommandText = "spDeleteEmployee"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
-            objSelectCmd.Parameters.Add("emp_id", MySqlDbType.Int32).Value = e_id;
+            objSelectCmd.Parameters.Add("e_id", MySqlDbType.Int32).Value = e_id;
 
             try
             {

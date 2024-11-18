@@ -84,14 +84,14 @@ namespace Data
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spUpdateCategory"; //nombre del procedimiento almacenado
+            objSelectCmd.CommandText = "spUpdateClient"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
-            objSelectCmd.Parameters.Add("cli_id", MySqlDbType.Int32).Value = c_id;
-            objSelectCmd.Parameters.Add("cli_nombres", MySqlDbType.VarString).Value = c_names;
-            objSelectCmd.Parameters.Add("cli_apellidos", MySqlDbType.VarString).Value = c_lastnames;
-            objSelectCmd.Parameters.Add("cli_correo", MySqlDbType.VarString).Value = c_mail;
-            objSelectCmd.Parameters.Add("cli_telefono", MySqlDbType.VarString).Value = c_phone;
-            objSelectCmd.Parameters.Add("cli_direccion", MySqlDbType.VarString).Value = c_addres;
+            objSelectCmd.Parameters.Add("c_id", MySqlDbType.Int32).Value = c_id;
+            objSelectCmd.Parameters.Add("c_names", MySqlDbType.VarString).Value = c_names;
+            objSelectCmd.Parameters.Add("c_lastnames", MySqlDbType.VarString).Value = c_lastnames;
+            objSelectCmd.Parameters.Add("c_mail", MySqlDbType.VarString).Value = c_mail;
+            objSelectCmd.Parameters.Add("c_phone", MySqlDbType.VarString).Value = c_phone;
+            objSelectCmd.Parameters.Add("e_addres", MySqlDbType.VarString).Value = c_addres;
 
             try
             {
@@ -120,7 +120,7 @@ namespace Data
             objSelectCmd.Connection = objPer.openConnection();
             objSelectCmd.CommandText = "spDeleteClient"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
-            objSelectCmd.Parameters.Add("cli_id", MySqlDbType.Int32).Value = c_id;
+            objSelectCmd.Parameters.Add("c_id", MySqlDbType.Int32).Value = c_id;
 
             try
             {

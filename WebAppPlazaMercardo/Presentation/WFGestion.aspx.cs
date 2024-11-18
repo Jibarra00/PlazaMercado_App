@@ -121,7 +121,7 @@ namespace Presentation
                 p_ges_fecha = DateTime.Parse(TBDate.Text);
                 _fkemployee = Convert.ToInt32(DDLEmployee.SelectedValue);
                 _fkproduct = Convert.ToInt32(DDLProduct.SelectedValue);
-                executed = objGes.updateManagement(p_ges_id, p_ges_fecha, p_ges_descripcion, _fkemployee, _fkproduct);
+                executed = objGes.updateManagement(p_ges_id,p_ges_fecha,p_ges_descripcion);
                 if (executed)
                 {
                     LblMsg.Text = "La gestión se actualizó exitosamente!";

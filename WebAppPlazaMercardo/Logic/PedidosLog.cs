@@ -26,7 +26,7 @@ namespace Logic
         {
             return objPed.updatePedidos(_id, _date, _state, _specification, _fkCliente, _fkproducto);
         }
-        public bool spDeletePedidos(int _idPedidos)
+        public bool DeletePedidos(int _idPedidos)
         {
             return objPed.spDeletePedidos(_idPedidos);
         }

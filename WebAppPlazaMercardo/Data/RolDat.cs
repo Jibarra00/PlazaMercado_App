@@ -20,7 +20,7 @@ namespace Data
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spSelectrolDDL";
+            objSelectCmd.CommandText = "spSelectRolDDL";
             objSelectCmd.CommandType = CommandType.StoredProcedure;
             objAdapter.SelectCommand = objSelectCmd;
             objAdapter.Fill(objData);
@@ -43,7 +43,7 @@ namespace Data
             objSelectCmd.Connection = objPer.openConnection();
 
             // Se especifica el nombre del procedimiento almacenado a ejecutar.
-            objSelectCmd.CommandText = "spSelectrol";
+            objSelectCmd.CommandText = "spSelectRol";
 
             // Se indica que se trata de un procedimiento almacenado.
             objSelectCmd.CommandType = CommandType.StoredProcedure;
@@ -75,7 +75,7 @@ namespace Data
 
             // Se agregan parámetros al comando para pasar los valores del rol.
             objSelectCmd.Parameters.Add("r_nombre", MySqlDbType.VarString).Value = _nombre;
-            objSelectCmd.Parameters.Add("r_description", MySqlDbType.VarString).Value = _description;
+            objSelectCmd.Parameters.Add("r_descripcion", MySqlDbType.VarString).Value = _description;
 
 
 
@@ -113,7 +113,7 @@ namespace Data
             // Se agregan parámetros al comando para pasar los valores del rol.
             objSelectCmd.Parameters.Add("r_id", MySqlDbType.Int32).Value = _id;
             objSelectCmd.Parameters.Add("r_nombre", MySqlDbType.VarString).Value = _nombre;
-            objSelectCmd.Parameters.Add("r_description", MySqlDbType.VarString).Value = _description;
+            objSelectCmd.Parameters.Add("r_descripcion", MySqlDbType.VarString).Value = _description;
 
             try
             {
@@ -138,7 +138,7 @@ namespace Data
 
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
-            objSelectCmd.CommandText = "spDeleterol"; //nombre del procedimiento almacenado
+            objSelectCmd.CommandText = "spDeleteRol"; //nombre del procedimiento almacenado
             objSelectCmd.CommandType = CommandType.StoredProcedure;
             objSelectCmd.Parameters.Add("r_id", MySqlDbType.Int32).Value = _idRol;
 

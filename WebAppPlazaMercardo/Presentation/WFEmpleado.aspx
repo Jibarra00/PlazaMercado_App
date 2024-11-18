@@ -5,7 +5,7 @@
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form runat="server">
+    <form>
         <%--Id--%>
         <asp:HiddenField ID="HFEmployeeID" runat="server" />
 
