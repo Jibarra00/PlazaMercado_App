@@ -21,6 +21,7 @@
             <a href="WFGestion.aspx">Gestion</a>
             <a href="WFPedidos.aspx">Pedidos</a>
             <a href="WFPermiso.aspx">Permisos</a>
+            <a href="WFPermisoRol.aspx">Permiso Rol</a>
             <a href="WFProducto.aspx">Productos</a>
             <a href="WFProveedor.aspx">Proveedores</a>
             <a href="WFRol.aspx">Roles</a>

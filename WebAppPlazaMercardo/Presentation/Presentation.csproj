@@ -82,6 +82,7 @@
     <Content Include="WFInicio.aspx" />
     <Content Include="WFPedidos.aspx" />
     <Content Include="WFPermiso.aspx" />
+    <Content Include="WFPermisoRol.aspx" />
     <Content Include="WFProducto.aspx" />
     <Content Include="WFProveedor.aspx" />
     <Content Include="WFRol.aspx" />
@@ -159,6 +160,13 @@
     </Compile>
     <Compile Include="WFPermiso.aspx.designer.cs">
       <DependentUpon>WFPermiso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WFPermisoRol.aspx.cs">
+      <DependentUpon>WFPermisoRol.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WFPermisoRol.aspx.designer.cs">
+      <DependentUpon>WFPermisoRol.aspx</DependentUpon>
     </Compile>
     <Compile Include="WFProducto.aspx.cs">
       <DependentUpon>WFProducto.aspx</DependentUpon>

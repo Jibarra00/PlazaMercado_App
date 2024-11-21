@@ -144,6 +144,7 @@
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="PedidosDat.cs" />
     <Compile Include="PermisoDat.cs" />
+    <Compile Include="PermisoRolDat.cs" />
     <Compile Include="Persistence.cs" />
     <Compile Include="ProductoDat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

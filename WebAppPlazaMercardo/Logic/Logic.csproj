@@ -74,6 +74,7 @@
     <Compile Include="GestionLog.cs" />
     <Compile Include="PedidosLog.cs" />
     <Compile Include="PermisoLog.cs" />
+    <Compile Include="PermisoRolLog.cs" />
     <Compile Include="ProductoLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProveedorLog.cs" />
