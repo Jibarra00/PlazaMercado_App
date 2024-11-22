@@ -26,6 +26,7 @@
             <a href="WFProveedor.aspx">Proveedores</a>
             <a href="WFRol.aspx">Roles</a>
             <a href="WFUsuario.aspx">Usuarios</a>
+            <a href="Logout.aspx">Cerrar sesion</a>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
