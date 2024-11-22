@@ -25,6 +25,13 @@ namespace Presentation
 
         protected void BtnIniciar_Click(object sender, EventArgs e)
         {
+            // Muestra la imagen de cargando antes de procesar la encriptación
+            ScriptManager.RegisterStartupScript(this, GetType(), "showLoading", "showLoading();", true);
+
+            /*
+             * Instancia un servicio de criptografía utilizando el algoritmo PBKDF2 (Password-Based Key Derivation Function 2),
+             * que es comúnmente utilizado para cifrar contraseñas de forma segura.
+             */
             ICryptoService cryptoService = new PBKDF2();
 
             _correo = TBCorreo.Text;
@@ -57,7 +64,8 @@ namespace Presentation
             {
                 LblMsg.Text = "Correo o Contraseña Incorrectos!";
             }
-
+            // Oculta la imagen de cargando al terminar el procesamiento
+            ScriptManager.RegisterStartupScript(this, GetType(), "hideLoading", "hideLoading();", true);
 
         }
     }
