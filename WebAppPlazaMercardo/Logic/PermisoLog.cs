@@ -17,6 +17,10 @@ namespace Logic
         {
             return objPer.showPermisos();
         }
+        public DataSet showPermisoDDL()
+        {
+            return objPer.showPermisoDDL();
+        }
         public bool savePermiso(string _name, string _description)
         {
             return objPer.savePermiso(_name, _description);

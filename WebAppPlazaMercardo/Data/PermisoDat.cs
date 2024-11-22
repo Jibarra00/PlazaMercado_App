@@ -45,6 +45,21 @@ namespace Data
             // Se devuelve el DataSet que contiene los permisos.
             return objData;
         }
+
+        public DataSet showPermisoDDL()
+        {
+            MySqlDataAdapter objAdapter = new MySqlDataAdapter();
+            DataSet objData = new DataSet();
+
+            MySqlCommand objSelectCmd = new MySqlCommand();
+            objSelectCmd.Connection = objPer.openConnection();
+            objSelectCmd.CommandText = "spSelectPermissionDDL";
+            objSelectCmd.CommandType = CommandType.StoredProcedure;
+            objAdapter.SelectCommand = objSelectCmd;
+            objAdapter.Fill(objData);
+            objPer.closeConnection();
+            return objData;
+        }
         //Metodo para guardar un nuevo Permiso
         public bool savePermiso(string _name, string _description)
         {
