@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="Default.aspx" />
+    <Content Include="Logout.aspx" />
     <Content Include="resources\css\datatables.css" />
     <Content Include="resources\css\datatables.min.css" />
     <Content Include="resources\images\loading-7528_128.gif" />
@@ -96,6 +97,12 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Main.Master.cs">
       <DependentUpon>Main.Master</DependentUpon>
