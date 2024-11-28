@@ -4,7 +4,7 @@
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form>
+    <form id="FrmPedidos" runat="server">
     <%--ID--%>
         <asp:HiddenField ID="HFPedidosID" runat="server" />
     <br />
@@ -34,14 +34,15 @@
 
     <%--BOTON DE GUARDAR Y ACTUALIZAR--%>
     <div>
-        <asp:Button ID="BTSave" runat="server" Text="Guardar" OnClick="BTSave_Click" />
-        <asp:Button ID="BTUpdate" runat="server" Text="Actualizar" OnClick="BTUpdate_Click" />
+        <asp:Button ID="BtnSave" runat="server" Text="Guardar" OnClick="BTSave_Click" />
+        <asp:Button ID="BtnUpdate" runat="server" Text="Actualizar" OnClick="BTUpdate_Click" />
         <asp:Label ID="LblMsg" runat="server" Text=""></asp:Label>
     </div>
     </form>
 
     <%--lista de pedidos--%>
-    
+    <asp:Panel ID="PanelAdmin" runat="server">
+
     <h2>Lista de Pedidos</h2>
     <table id="PedidosTable" class="display" style="width: 100%">
         <thead>
@@ -59,11 +60,14 @@
         <tbody>
         </tbody>
     </table>
+    </asp:Panel>
     <%--DataTables--%>
     <script src="resources/js/datatables.min.js"></script>
     <%--Pedidos--%>
     <script type="text/javascript">
         $(document).ready(function () {
+            const showEditButton = '<%= _showEditButton %>' === 'True';
+            const showDeleteButton = '<%= _showDeleteButton %>' === 'True';
             $('#PedidosTable').DataTable({
                 "processing": true,
                 "serverSide": false,
@@ -91,8 +95,14 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<button class="edit-btn" data-id="${row.PedidosID}">Editar</button>
-                                 <button class="delete-btn" data-id="${row.PedidosID}">Eliminar</button>`;
+                            let buttons = '';
+                            if (showEditButton) {
+                                buttons += `<button class="btn btn-info edit-btn" data-id="${row.PedidosID}">Editar</button>`;
+                            }
+                            if (showDeleteButton) {
+                                buttons += `<button class="btn btn-danger delete-btn" data-id="${row.PedidosID}">Eliminar</button>`;
+                            }
+                            return buttons;
                         }
                     }
                 ],

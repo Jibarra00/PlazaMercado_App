@@ -5,6 +5,8 @@
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <form id="FrmGestion" runat="server">
+
     <%-- Id --%>
     <asp:HiddenField ID="HFManagementID" runat="server" />
     <br />
@@ -31,7 +33,10 @@
         <asp:Label ID="LblMsg" runat="server" Text=""></asp:Label>
     </div>
     <br />
+    </form>
     <%-- Lista de gestiones --%>
+    <asp:Panel ID="PanelAdmin" runat="server">
+
     <h2>Lista de Gestiones</h2>
     <table id="managementTable" class="display" style="width: 100%">
         <thead>
@@ -46,12 +51,15 @@
         <tbody>
         </tbody>
     </table>
+    </asp:Panel>
 
     <script src="resources/js/datatables.min.js" type="text/javascript"></script>
 
      <%--Gestiones--%>
     <script type="text/javascript">
         $(document).ready(function () {
+            const showEditButton = '<%= _showEditButton %>' === 'True';
+            const showDeleteButton = '<%= _showDeleteButton %>' === 'True';
             $('#managementTable').DataTable({
                 "processing": true,
                 "serverSide": false,
@@ -75,8 +83,14 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<button class="edit-btn" data-id="${row.ManagementID}">Editar</button>
-                              <button class="delete-btn" data-id="${row.ManagementID}">Eliminar</button>`;
+                            let buttons = '';
+                            if (showEditButton) {
+                                buttons += `<button class="btn btn-info edit-btn" data-id="${row.ManagementID}">Editar</button>`;
+                            }
+                            if (showDeleteButton) {
+                                buttons += `<button class="btn btn-danger delete-btn" data-id="${row.ManagementID}">Eliminar</button>`;
+                            }
+                            return buttons;
                         }
                     }
                 ],

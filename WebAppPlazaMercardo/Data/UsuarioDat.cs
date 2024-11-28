@@ -45,31 +45,84 @@ namespace Data
         }
 
         // Metodo que retorna un objeto con el usuario encontrado por el correo
-        public User showUserEmail(string mail)
+        //public User showUserEmail(string mail)
+        //{
+        //    User objUser = null;
+        //    MySqlCommand objSelectCmd = new MySqlCommand();
+        //    objSelectCmd.Connection = objPer.openConnection();
+        //    objSelectCmd.CommandText = "spSelectUserMail";
+        //    objSelectCmd.CommandType = CommandType.StoredProcedure;
+        //    objSelectCmd.Parameters.Add("p_mail", MySqlDbType.VarString).Value = mail;
+        //    MySqlDataReader reader = objSelectCmd.ExecuteReader();
+        //    if (!reader.HasRows)
+        //    {
+        //        return objUser;
+        //    }
+        //    else
+        //    {
+        //        while (reader.Read())
+        //        {
+        //            objUser = new User(reader["usu_correo"].ToString(),
+        //            reader["usu_contrasena"].ToString(), reader["usu_salt"].ToString(),
+        //            reader["usu_estado"].ToString(), reader["rol_nombre"].ToString(), Convert.ToInt32(reader["per_id"]));
+        //        }
+        //    }
+        //    objPer.closeConnection();
+        //    return objUser;
+        //}
+
+        public User showUsersMail(string mail)
         {
             User objUser = null;
+            List<Permission> permisos = new List<Permission>();
+
             MySqlCommand objSelectCmd = new MySqlCommand();
             objSelectCmd.Connection = objPer.openConnection();
             objSelectCmd.CommandText = "spSelectUserMail";
             objSelectCmd.CommandType = CommandType.StoredProcedure;
             objSelectCmd.Parameters.Add("p_mail", MySqlDbType.VarString).Value = mail;
             MySqlDataReader reader = objSelectCmd.ExecuteReader();
+
             if (!reader.HasRows)
             {
                 return objUser;
             }
-            else
+
+            while (reader.Read())
             {
-                while (reader.Read())
+                // Si el objeto User es nulo, inicializarlo (solo se hace una vez)
+                if (objUser == null)
                 {
-                    objUser = new User(reader["usu_correo"].ToString(),
-                    reader["usu_contrasena"].ToString(), reader["usu_salt"].ToString(),
-                    reader["usu_estado"].ToString(), reader["rol_nombre"].ToString(), Convert.ToInt32(reader["per_id"]));
+                    // Inicializar rol
+                    Rol userRol = new Rol(
+                        id: Convert.ToInt32(reader["rol_id"]), // Si tienes el ID del rol
+                        nombre: reader["rol_nombre"].ToString(),
+                        descripcion: reader["rol_descripcion"].ToString() // Ajusta según tu estructura
+                    );
+
+                    // Crear objeto User con los datos iniciales
+                    objUser = new User(
+                        correo: reader["usu_correo"].ToString(),
+                        contrasena: reader["usu_contrasena"].ToString(),
+                        salt: reader["usu_salt"].ToString(),
+                        state: reader["usu_estado"].ToString(),
+                        rol: userRol,
+                        permisos: permisos // Inicialmente vacío, luego se irá llenando
+                    );
                 }
+                // Crear permiso y agregarlo a la lista de permisos
+                Permission permiso = new Permission(
+                    id: Convert.ToInt32(reader["per_id"]), // Si tienes el ID del permiso
+                    nombre: reader["per_nombre"].ToString(),
+                    descripcion: reader["per_descripcion"].ToString() // Ajusta según tu estructura
+                );
+
+                permisos.Add(permiso);
             }
             objPer.closeConnection();
             return objUser;
         }
+
 
         //Metodo para guardar un nuevo Usuario
         public bool saveUsuario(string _email,string _password, string _salt, string _state, DateTime _Create_Date, int _fkrol, int _fkempleado)

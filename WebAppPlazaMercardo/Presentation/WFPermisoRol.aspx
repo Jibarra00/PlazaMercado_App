@@ -3,7 +3,7 @@
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form >
+    <form id="FrmPermisoRol" runat="server">
         <%--ID--%>
         <asp:HiddenField ID="HFPermisoRolID" runat="server" />
         <br />
@@ -20,13 +20,15 @@
         <asp:TextBox ID="TBFecha" runat="server" TextMode="Date"></asp:TextBox>
         <br />
         <div>
-            <asp:Button ID="BtnGuardar" runat="server" Text="Guardar" OnClick="BtnGuardar_Click" />
+            <asp:Button ID="BtnSave" runat="server" Text="Guardar" OnClick="BtnGuardar_Click" />
             <asp:Button ID="BtnUpdate" runat="server" Text="Actualizar" OnClick="BtnUpdate_Click" />
             <asp:Label ID="LblMsg" runat="server" Text=""></asp:Label>
         </div>
     </form>
 
     <%--Lista de permisos roles--%>
+    <asp:Panel ID="PanelAdmin" runat="server">
+
     <h2>Lista de Proveedores</h2>
     <table id="permisosRolesTable" class="display" style="width: 100%">
         <thead>
@@ -42,6 +44,7 @@
         <tbody>
         </tbody>
     </table>
+    </asp:Panel>
 
     <%--DataTables--%>
     <script src="resources/js/datatables.min.js" type="text/javascript"></script>
@@ -49,6 +52,8 @@
     <%--Permisos rol--%>
     <script type="text/javascript">
         $(document).ready(function () {
+            const showEditButton = '<%= _showEditButton %>' === 'True';
+            const showDeleteButton = '<%= _showDeleteButton %>' === 'True';
             $('#permisosRolesTable').DataTable({
                 "processing": true,
                 "serverSide": false,
@@ -73,8 +78,14 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<button class="edit-btn" data-id="${row.PermisoRolID}">Editar</button>
-                                 <button class="delete-btn" data-id="${row.PermisoRolID}">Eliminar</button>`;
+                            let buttons = '';
+                            if (showEditButton) {
+                                buttons += `<button class="btn btn-info edit-btn" data-id="${row.PermisoRolID}">Editar</button>`;
+                            }
+                            if (showDeleteButton) {
+                                buttons += `<button class="btn btn-danger delete-btn" data-id="${row.PermisoRolID}">Eliminar</button>`;
+                            }
+                            return buttons;
                         }
                     }
                 ],

@@ -5,7 +5,7 @@
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form>
+    <form id="FrmUsuarios" runat="server">
         <%--ID--%>
         <asp:HiddenField ID="HFUsuarioID" runat="server" />
         <br />
@@ -47,6 +47,7 @@
     </form>
 
     <%--LISTA DE USUARIOS--%>
+    <asp:Panel ID="PanelAdmin" runat="server">
 
     <h2>Lista de Usuarios</h2>
     <table id="UsuarioTable" class="display" style="width: 100%">
@@ -67,6 +68,7 @@
         <tbody>
         </tbody>
     </table>
+    </asp:Panel>
 
 
     <%--DataTables--%>
@@ -75,6 +77,8 @@
     <%--Usuarios--%>
     <script type="text/javascript">
         $(document).ready(function () {
+            const showEditButton = '<%= _showEditButton %>' === 'True';
+            const showDeleteButton = '<%= _showDeleteButton %>' === 'True';
             $('#UsuarioTable').DataTable({
                 "processing": true,
                 "serverSide": false,
@@ -104,8 +108,14 @@
                     {
                         "data": null,
                         "render": function (row) {
-                            return `<button class="edit-btn" data-id="${row.UsuarioID}">Editar</button>
-                                 <button class="delete-btn" data-id="${row.UsuarioID}">Eliminar</button>`;
+                            let buttons = '';
+                            if (showEditButton) {
+                                buttons += `<button class="btn btn-info edit-btn" data-id="${row.UsuarioID}">Editar</button>`;
+                            }
+                            if (showDeleteButton) {
+                                buttons += `<button class="btn btn-danger delete-btn" data-id="${row.UsuarioID}">Eliminar</button>`;
+                            }
+                            return buttons;
                         }
                     }
                 ],

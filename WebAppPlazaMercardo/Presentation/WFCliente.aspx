@@ -7,7 +7,7 @@
     </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form>
+    <form id="FrmCliente" runat="server">
 
         <%-- Id --%>
         <asp:HiddenField ID="HFClientID" runat="server" />
@@ -43,6 +43,7 @@
     </form>
         
     <%--Lista de Clientes--%>
+    <asp:Panel ID="PanelAdmin" runat="server">
 
     <h2>Lista de Clientes</h2>
     <table id="clientsTable" class="display" style="width: 100%">
@@ -60,13 +61,17 @@
         <tbody>
         </tbody>
     </table>
+    </asp:Panel>
     
     <script src="resources/js/datatables.min.js" type="text/javascript"></script>
 
     <%--Clientes--%>
 <script type="text/javascript">
     $(document).ready(function () {
+        const showEditButton = '<%= _showEditButton %>' === 'True';
+        const showDeleteButton = '<%= _showDeleteButton %>' === 'True';
         $('#clientsTable').DataTable({
+            
             "processing": true,
             "serverSide": false,
             "ajax": {
@@ -90,8 +95,14 @@
                 {
                     "data": null,
                     "render": function (data, type, row) {
-                        return `<button class="edit-btn" data-id="${row.ClientID}">Editar</button>
-                         <button class="delete-btn" data-id="${row.ClientID}">Eliminar</button>`;
+                        let buttons = '';
+                        if (showEditButton) {
+                            buttons += `<button class="btn btn-info edit-btn" data-id="${row.ClientID}">Editar</button>`;
+                        }
+                        if (showDeleteButton) {
+                            buttons += `<button class="btn btn-danger delete-btn" data-id="${row.ClientID}">Eliminar</button>`;
+                        }
+                        return buttons;
                     }
                 }
             ],
