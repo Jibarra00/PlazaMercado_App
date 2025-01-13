@@ -1,0 +1,131 @@
+﻿/* Estilos generales */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f6f1;
+    color: #333;
+}
+
+/* Estilos para la tabla */
+table#employeesTable {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+    table#employeesTable thead {
+        background-color: #ffcc66; /* Color naranja frutal */
+        color: #fff;
+    }
+
+        table#employeesTable thead th {
+            padding: 15px;
+            font-size: 1.1em;
+            text-align: left;
+        }
+
+    table#employeesTable tbody tr {
+        border-bottom: 1px solid #f0e1b3;
+        transition: background-color 0.3s ease;
+    }
+
+        table#employeesTable tbody tr:hover {
+            background-color: #ffebcc; /* Fondo al pasar el ratón */
+        }
+
+    table#employeesTable tbody td {
+        padding: 12px 15px;
+    }
+
+        table#employeesTable tbody td button {
+            background-color: #ff9966;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+            table#employeesTable tbody td button:hover {
+                background-color: #e68a4d;
+            }
+
+/* Estilos para formularios y botones */
+form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+    form label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    form input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+
+        form input[type="text"]:focus {
+            border-color: #ff9966;
+        }
+
+    form button {
+        background-color: #66cc66;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 1em;
+        transition: background-color 0.3s ease;
+    }
+
+        form button:hover {
+            background-color: #57a957;
+        }
+
+/* Estilos para los botones de acción */
+.btn-custom {
+    background-color: #66cc66; /* Verde frutal */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .btn-custom:hover {
+        background-color: #57a957; /* Verde más oscuro al pasar el ratón */
+    }
+
+.btn-update {
+    background-color: #ff9966; /* Naranja frutal */
+}
+
+    .btn-update:hover {
+        background-color: #e68a4d; /* Naranja más oscuro al pasar el ratón */
+    }
+
+/* Mensaje de éxito o error */
+#LblMsg {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.1em;
+    color: #4caf50; /* Verde éxito */
+    font-weight: bold;
+}

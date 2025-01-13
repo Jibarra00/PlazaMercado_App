@@ -1,8 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="WFProveedor.aspx.cs" Inherits="Presentation.WFProveedor" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="resources/css/datatables.min.css" rel="stylesheet" />
+    <link href="resources/css/Proveedor.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Gestión De Proveedores</h1>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
     <%--formulario--%>
     <form id="FrmProveedor" runat="server">
         <%--ID--%>

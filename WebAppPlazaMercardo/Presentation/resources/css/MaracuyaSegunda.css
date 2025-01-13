@@ -1,0 +1,72 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8e7;
+    color: #333;
+}
+
+header {
+    width: 100%;
+    background-color: #ffb300;
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 600px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.titulo {
+    color: #ff6f00;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.imagen-maracuya {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.descripcion {
+    color: #555;
+    line-height: 1.6;
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+
+.btn-pedido {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .btn-pedido:hover {
+        background-color: #218838;
+    }
+
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: white;
+    font-size: 0.9em;
+    margin-top: 20px;
+}

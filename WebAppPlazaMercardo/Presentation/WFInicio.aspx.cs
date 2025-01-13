@@ -26,7 +26,7 @@ namespace Presentation
             if (objUser == null)
             {
                 // Redirige a la página de inicio de sesión si el usuario no está autenticado
-                Response.Redirect("WFDefault.aspx");
+                Response.Redirect("Default.aspx");
                 return;
             }
             // Obtener el rol del usuario

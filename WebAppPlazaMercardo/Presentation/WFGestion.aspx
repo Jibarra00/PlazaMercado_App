@@ -3,8 +3,19 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <%-- Estilos --%>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
+    <link href="resources/css/Gestion2.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Gestión</h1>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
     <form id="FrmGestion" runat="server">
 
     <%-- Id --%>
