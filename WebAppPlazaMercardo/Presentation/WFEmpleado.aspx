@@ -3,9 +3,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <%--Estilos--%>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
+    <link href="resources/css/Empleados2.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form>
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Gestión De Empleados</h1>
+        </div>
+    </div>
+    <form id="FrmEmpleado" runat="server">
         <%--Id--%>
         <asp:HiddenField ID="HFEmployeeID" runat="server" />
 
@@ -29,7 +36,7 @@
         <asp:Label ID="Label5" runat="server" Text="Ingrese su direccion"></asp:Label>
         <asp:TextBox ID="TBaddres" runat="server"></asp:TextBox>
         <br />
-        
+
         <%--Botones Guardar y Actualizar--%>
         <div>
             <asp:Button ID="BtnSave" runat="server" Text="Guardar" OnClick="BtnSave_Click" />
@@ -41,28 +48,33 @@
 
 
     <%--Lista de Empleados--%>
-    <h2>Lista de Empleados</h2>
-    <table id="employeesTable" class="display" style="width: 100%">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Identificacion</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Telefono</th>
-                <th>Direccion</th>
-               
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <asp:Panel ID="PanelAdmin" runat="server">
+
+        <h2>Lista de Empleados</h2>
+        <table id="employeesTable" class="display" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Identificacion</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Telefono</th>
+                    <th>Direccion</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </asp:Panel>
 
     <script src="resources/js/datatables.min.js" type="text/javascript"></script>
 
     <%--Empleados--%>
     <script type="text/javascript">
         $(document).ready(function () {
+            const showEditButton = '<%= _showEditButton %>' === 'True';
+            const showDeleteButton = '<%= _showDeleteButton %>' === 'True';
             $('#employeesTable').DataTable({
                 "processing": true,
                 "serverSide": false,
@@ -90,8 +102,14 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<button class="edit-btn" data-id="${row.EmployeeID}">Editar</button>
-                            <button class="delete-btn" data-id="${row.EmployeeID}">Eliminar</button>`;
+                            let buttons = '';
+                            if (showEditButton) {
+                                buttons += `<button class="btn btn-info edit-btn" data-id="${row.EmployeeID}">Editar</button>`;
+                            }
+                            if (showDeleteButton) {
+                                buttons += `<button class="btn btn-danger delete-btn" data-id="${row.EmployeeID}">Eliminar</button>`;
+                            }
+                            return buttons;
                         }
                     }
                 ],
@@ -113,22 +131,22 @@
         });
 
 
-            // Editar un producto
-            $('#employeesTable').on('click', '.edit-btn', function () {
-                //const id = $(this).data('id');
-                const rowData = $('#employeesTable').DataTable().row($(this).parents('tr')).data();
-                //alert(JSON.stringify(rowData, null, 2));
-                loadEmployeeData(rowData);
-            });
+        // Editar un producto
+        $('#employeesTable').on('click', '.edit-btn', function () {
+            //const id = $(this).data('id');
+            const rowData = $('#employeesTable').DataTable().row($(this).parents('tr')).data();
+            //alert(JSON.stringify(rowData, null, 2));
+            loadEmployeeData(rowData);
+        });
 
-            // Eliminar un producto
-            $('#employeesTable').on('click', '.delete-btn', function () {
-                const id = $(this).data('id');// Obtener el ID del producto
-                if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
-                    deleteEmployee(id);// Invoca a la función para eliminar el producto
-                }
-            });
-        
+        // Eliminar un producto
+        $('#employeesTable').on('click', '.delete-btn', function () {
+            const id = $(this).data('id');// Obtener el ID del producto
+            if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+                deleteEmployee(id);// Invoca a la función para eliminar el producto
+            }
+        });
+
 
         // Cargar los datos en los TextBox y DDL para actualizar
         function loadEmployeeData(rowData) {
@@ -136,8 +154,8 @@
             $('#<%= TBCC.ClientID %>').val(rowData.Identification);
             $('#<%= TBname.ClientID %>').val(rowData.Name);
             $('#<%= TBlastname.ClientID %>').val(rowData.lastName);
-          $('#<%= TBphone.ClientID %>').val(rowData.Phone);
-          $('#<%= TBaddres.ClientID %>').val(rowData.Addres);
+            $('#<%= TBphone.ClientID %>').val(rowData.Phone);
+            $('#<%= TBaddres.ClientID %>').val(rowData.Addres);
         }
 
         // Función para eliminar un producto

@@ -1,0 +1,17 @@
+﻿body {
+}
+#Logout {
+    border: none;
+    padding: 10px 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: inline-flex;
+    background-color: #4e73df 10%;
+}
+    
+    #Logout a {
+        margin-right: 5px;
+        color: #ffffff;
+    }
+

@@ -1,0 +1,93 @@
+﻿/* Estilo para hacer que el carrusel ocupe todo el ancho de la pantalla */
+.carousel-container {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+}
+
+/* Estilo personalizado para los botones laterales del carrusel */
+.custom-carousel-control {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-size: 100%, 100%;
+}
+
+.carousel-control-prev-icon {
+    background-image: url('path/to/prev-icon.svg'); /* Reemplaza con el ícono que desees */
+}
+
+.carousel-control-next-icon {
+    background-image: url('path/to/next-icon.svg'); /* Reemplaza con el ícono que desees */
+}
+.carousel-inner img {
+    width: 100%; /* Ocupa el 100% del ancho del contenedor */
+    height: 500px; /* Ajusta la altura según tu preferencia */
+    object-fit: cover; /* Asegura que la imagen se recorte sin distorsionarse */
+}
+.carousel-control-prev,
+.carousel-control-next {
+    top: 50%; /* Centra los botones verticalmente */
+    transform: translateY(-50%); /* Alineación central */
+    width: 5%; /* Ajusta el ancho del área de clic según sea necesario */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro para el icono */
+    border-radius: 50%; /* Hacer los íconos redondos */
+    width: 30px; /* Ajusta el tamaño según sea necesario */
+    height: 30px;
+}
+#carouselExampleIndicators {
+    max-width: 80%; /* Ajusta el ancho a lo que necesites */
+    margin: 0 auto; /* Centra el carrusel en la página */
+}
+/* Estilos generales para los botones de navegación */
+.carousel-control-prev, .carousel-control-next {
+    top: 50%; /* Centrado verticalmente */
+    transform: translateY(-50%);
+    width: 40px; /* Ajusta el tamaño según prefieras */
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco semitransparente */
+    border-radius: 50%; /* Hacerlos redondos */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333; /* Color del icono */
+    transition: background-color 0.3s ease;
+}
+
+    .carousel-control-prev:hover, .carousel-control-next:hover {
+        background-color: rgba(255, 255, 255, 0.8); /* Cambia el color de fondo al pasar el mouse */
+    }
+
+/* Iconos personalizados para los botones */
+.custom-prev-icon, .custom-next-icon {
+    font-size: 24px; /* Tamaño del icono de flecha */
+    font-weight: bold; /* Grosor de la flecha */
+    color: #333; /* Color de la flecha */
+}
+
+/* Cambia el tamaño en pantallas pequeñas si es necesario */
+@media (max-width: 768px) {
+    .carousel-control-prev, .carousel-control-next {
+        width: 30px;
+        height: 30px;
+    }
+
+    .custom-prev-icon, .custom-next-icon {
+        font-size: 18px;
+    }
+}

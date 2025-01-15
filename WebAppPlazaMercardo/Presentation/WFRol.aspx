@@ -2,11 +2,21 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
-
+    <link href="resources/css/Rol.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Gestión De Roles</h1>
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
     <%--formulario--%>
-    <form>
+    <form id="FrmRol" runat="server">
         <%--ID--%>
         <asp:HiddenField ID="HFRolID" runat="server" />
         <br />
@@ -31,6 +41,8 @@
 
     </form>
     <%--Lista de Roles--%>
+    <asp:Panel ID="PanelAdmin" runat="server">
+
     <h2>Lista de Roles</h2>
     <table id="RolTable" class="display" style="width: 100%">
         <thead>
@@ -44,12 +56,15 @@
         <tbody>
         </tbody>
     </table>
+    </asp:Panel>
 
     <%--Datatables--%>
     <script src="resources/js/datatables.min.js" type="text/javascript"></script>
     <%--Roles--%>
     <script type="text/javascript">
         $(document).ready(function () {
+            const showEditButton = '<%= _showEditButton %>' === 'True';
+            const showDeleteButton = '<%= _showDeleteButton %>' === 'True';
             $('#RolTable').DataTable({
                 "processing": true,
                 "serverSide": false,
@@ -72,8 +87,14 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<button class="edit-btn" data-id="${row.rolID}">Editar</button>
-                                 <button class="delete-btn" data-id="${row.rolID}">Eliminar</button>`;
+                            let buttons = '';
+                            if (showEditButton) {
+                                buttons += `<button class="btn btn-info edit-btn" data-id="${row.rolID}">Editar</button>`;
+                            }
+                            if (showDeleteButton) {
+                                buttons += `<button class="btn btn-danger delete-btn" data-id="${row.rolID}">Eliminar</button>`;
+                            }
+                            return buttons;
                         }
                     }
                 ],

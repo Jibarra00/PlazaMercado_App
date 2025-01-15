@@ -1,0 +1,141 @@
+﻿/* Estilos generales */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f6f1;
+    color: #333;
+}
+
+/* Estilos del contenedor */
+.container-fluid {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Estilos del título de la página */
+h1.h3 {
+    font-size: 1.8em;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Estilos del formulario */
+form {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+    form label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+
+    form input[type="text"], form select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+
+        form input[type="text"]:focus, form select:focus {
+            border-color: #ff9966;
+        }
+
+    /* Botones de acción */
+    form button, .btn-custom {
+        background-color: #66cc66;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-right: 10px;
+    }
+
+        form button:hover, .btn-custom:hover {
+            background-color: #57a957;
+        }
+
+/* Estilos del mensaje de éxito o error */
+#LblMsg {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.1em;
+    color: #4caf50; /* Verde éxito */
+    font-weight: bold;
+}
+
+/* Estilos de la tabla */
+table#commentsTable {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-top: 20px;
+}
+
+    table#commentsTable thead {
+        background-color: #ffcc66; /* Color naranja frutal */
+        color: #fff;
+    }
+
+        table#commentsTable thead th {
+            padding: 15px;
+            font-size: 1.1em;
+            text-align: left;
+        }
+
+    table#commentsTable tbody tr {
+        border-bottom: 1px solid #f0e1b3;
+        transition: background-color 0.3s ease;
+    }
+
+        table#commentsTable tbody tr:hover {
+            background-color: #ffebcc; /* Fondo al pasar el ratón */
+        }
+
+    table#commentsTable tbody td {
+        padding: 12px 15px;
+    }
+
+/* Botones de acción en la tabla */
+.edit-btn, .delete-btn {
+    background-color: #ff9966;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-right: 5px;
+}
+
+    .edit-btn:hover {
+        background-color: #e68a4d;
+    }
+
+.delete-btn {
+    background-color: #d9534f; /* Rojo para eliminar */
+}
+
+    .delete-btn:hover {
+        background-color: #c9302c; /* Rojo más oscuro */
+    }
+
+/* Estilo para mensajes y títulos */
+h2 {
+    color: #333;
+    font-weight: bold;
+    margin-top: 30px;
+}

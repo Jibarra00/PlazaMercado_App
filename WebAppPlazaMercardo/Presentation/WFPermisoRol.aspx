@@ -1,54 +1,80 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="WFPermisoRol.aspx.cs" Inherits="Presentation.WFPermisoRol" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form >
-        <%--ID--%>
-        <asp:HiddenField ID="HFPermisoRolID" runat="server" />
-        <br />
-        <%--ROLES--%>
-        <asp:Label ID="Label1" runat="server" Text="Roles"></asp:Label>
-        <asp:DropDownList ID="DDLRoles" runat="server"></asp:DropDownList>
-        <br />
-        <%--PERMISOS--%>
-        <asp:Label ID="Label2" runat="server" Text="Permisos"></asp:Label>
-        <asp:DropDownList ID="DDLPermisos" runat="server"></asp:DropDownList>
-        <br />
-        <%--FECHA--%>
-        <asp:Label ID="Label3" runat="server" Text="Fecha de Asignación"></asp:Label>
-        <asp:TextBox ID="TBFecha" runat="server" TextMode="Date"></asp:TextBox>
-        <br />
-        <div>
-            <asp:Button ID="BtnGuardar" runat="server" Text="Guardar" OnClick="BtnGuardar_Click" />
-            <asp:Button ID="BtnUpdate" runat="server" Text="Actualizar" OnClick="BtnUpdate_Click" />
-            <asp:Label ID="LblMsg" runat="server" Text=""></asp:Label>
+    <div class="card m-1">
+        <div class="card-header">
+            Gestion de Permisos Roles
         </div>
-    </form>
+        <div class="card-body">
+            <form id="FrmPermisoRol" runat="server">
+                <%--ID--%>
+                <asp:HiddenField ID="HFPermisoRolID" runat="server" />
+                <div class="row m-1">
+                    <div class="col">
+                        <%--ROLES--%>
+                        <asp:Label ID="Label1" CssClass="form-label" runat="server" Text="Roles"></asp:Label>
+                        <asp:DropDownList ID="DDLRoles" CssClass="form-select" runat="server"></asp:DropDownList>
+                    </div>
+                    <br />
+                    <div class="col">
+                        <%--PERMISOS--%>
+                        <asp:Label ID="Label2" CssClass="form-label" runat="server" Text="Permisos"></asp:Label>
+                        <asp:DropDownList ID="DDLPermisos" CssClass="form-select" runat="server"></asp:DropDownList>
+                    </div>
+                    <div class="col-3">
+                        <%--FECHA--%>
+                        <asp:Label ID="Label3" CssClass="form-label" runat="server" Text="Fecha de Asignación"></asp:Label>
+                        <asp:TextBox ID="TBFecha" CssClass="form-control" runat="server" TextMode="Date"></asp:TextBox>
+                        <br />
+                    </div>
+                </div>
+                <div class="row m-2">
+                    <div class="col">
+                        <asp:Button ID="BtnSave" CssClass="btn btn-success" runat="server" Text="Guardar" OnClick="BtnGuardar_Click" />
+                        <asp:Button ID="BtnUpdate" CssClass="btn btn-success" runat="server" Text="Actualizar" OnClick="BtnUpdate_Click" />
+                        <asp:Label ID="LblMsg" CssClass="form-label" runat="server" Text=""></asp:Label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <%--Lista de permisos roles--%>
-    <h2>Lista de Proveedores</h2>
-    <table id="permisosRolesTable" class="display" style="width: 100%">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>IdPermiso</th>
-                <th>Permiso</th>
-                <th>IdRol</th>
-                <th>Rol</th>
-                <th>Fecha Asiganación</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <div class="card m-1">
+        <asp:Panel ID="PanelAdmin" runat="server">
 
+            <div class="card-header">
+                Lista de Permisos Roles
+            </div>
+            <div class="card-body">
+                <table id="permisosRolesTable" class=" table table-hover display" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>IdPermiso</th>
+                            <th>Permiso</th>
+                            <th>IdRol</th>
+                            <th>Rol</th>
+                            <th>Fecha Asiganación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </asp:Panel>
+    </div>
     <%--DataTables--%>
     <script src="resources/js/datatables.min.js" type="text/javascript"></script>
 
     <%--Permisos rol--%>
     <script type="text/javascript">
         $(document).ready(function () {
+            const showEditButton = '<%= _showEditButton %>' === 'True';
+            const showDeleteButton = '<%= _showDeleteButton %>' === 'True';
             $('#permisosRolesTable').DataTable({
                 "processing": true,
                 "serverSide": false,
@@ -73,8 +99,14 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<button class="edit-btn" data-id="${row.PermisoRolID}">Editar</button>
-                                 <button class="delete-btn" data-id="${row.PermisoRolID}">Eliminar</button>`;
+                            let buttons = '';
+                            if (showEditButton) {
+                                buttons += `<button class="btn btn-info edit-btn" data-id="${row.PermisoRolID}">Editar</button>`;
+                            }
+                            if (showDeleteButton) {
+                                buttons += `<button class="btn btn-danger delete-btn" data-id="${row.PermisoRolID}">Eliminar</button>`;
+                            }
+                            return buttons;
                         }
                     }
                 ],

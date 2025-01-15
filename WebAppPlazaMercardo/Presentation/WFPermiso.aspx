@@ -2,9 +2,20 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
+    <link href="resources/css/Permiso.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form>
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Gestión De Permisos</h1>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <form id="FrmPermiso" runat="server">
        <%-- ID--%>
         <asp:HiddenField ID="HFPermisoID" runat="server" />
         <br />
@@ -18,13 +29,15 @@
         <br />
         <%--Botones de guardar y actualizar--%>
         <div>
-            <asp:Button ID="BTSave" runat="server" Text="Guardar" OnClick="BTSave_Click" />
-            <asp:Button ID="BTUpdate" runat="server" Text="Actualizar" OnClick="BTUpdate_Click" />
-            <asp:Label ID="LblMsj" runat="server" Text=""></asp:Label>
+            <asp:Button ID="BtnSave" runat="server" Text="Guardar" OnClick="BTSave_Click" />
+            <asp:Button ID="BtnUpdate" runat="server" Text="Actualizar" OnClick="BTUpdate_Click" />
+            <asp:Label ID="LblMsg" runat="server" Text=""></asp:Label>
         </div>
         <br />
     </form>
     <%--Lista de permisos--%>
+    <asp:Panel ID="PanelAdmin" runat="server">
+
     <h2>Lista de Permisos</h2>
     <table id="PermisosTable" class="display" style="width: 100%">
         <thead>
@@ -37,6 +50,7 @@
         <tbody>
         </tbody>
     </table>
+    </asp:Panel>
 
     <%--DataTables--%>
     <script src="resources/js/datatables.min.js" type="text/javascript"></script>
@@ -45,6 +59,8 @@
     <%--Permiso--%>
     <script type="text/javascript">
         $(document).ready(function () {
+            const showEditButton = '<%= _showEditButton %>' === 'True';
+            const showDeleteButton = '<%= _showDeleteButton %>' === 'True';
             $('#PermisosTable').DataTable({
                 "processing": true,
                 "serverSide": false,
@@ -67,8 +83,14 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<button class="edit-btn" data-id="${row.PermisoID}">Editar</button>
-                                 <button class="delete-btn" data-id="${row.PermisoID}">Eliminar</button>`;
+                            let buttons = '';
+                            if (showEditButton) {
+                                buttons += `<button class="btn btn-info edit-btn" data-id="${row.PermisoID}">Editar</button>`;
+                            }
+                            if (showDeleteButton) {
+                                buttons += `<button class="btn btn-danger delete-btn" data-id="${row.PermisoID}">Eliminar</button>`;
+                            }
+                            return buttons;
                         }
                     }
                 ],

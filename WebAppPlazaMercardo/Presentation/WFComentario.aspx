@@ -3,60 +3,80 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <%-- Estilos --%>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
+    <link href="resources/css/Comentario.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <%-- Id --%>
-    <asp:HiddenField ID="HFCommentID" runat="server" />
-    <br />
-    <%--Texto--%>
-    <asp:Label ID="Label1" runat="server" Text="Ingrese el texto"></asp:Label>
-    <asp:TextBox ID="TBText" runat="server"></asp:TextBox>
-    <br />
-    <%-- Fecha --%>
-    <asp:Label ID="Label2" runat="server" Text="Ingrese la fecha"></asp:Label>
-    <asp:TextBox ID="TBDate" runat="server"></asp:TextBox>
-    <br />
-    <%-- Clasificación --%>
-    <asp:Label ID="Label3" runat="server" Text="Ingrese la clasificación"></asp:Label>
-    <asp:TextBox ID="TBClassification" runat="server"></asp:TextBox>
-    <br />
-    <%-- Cliente --%>
-    <asp:Label ID="Label4" runat="server" Text="Seleccione el cliente"></asp:Label>
-    <asp:DropDownList ID="DDLClient" runat="server"></asp:DropDownList>
-    <br />
-    <%-- Producto --%>
-    <asp:Label ID="Label5" runat="server" Text="Seleccione el producto"></asp:Label>
-    <asp:DropDownList ID="DDLProducto" runat="server"></asp:DropDownList>
-    <br />
+    <div class="container-fluid">
 
-    <%-- Boton guardar --%>
-    <div>
-        <asp:Button ID="BtnSave" runat="server" Text="Guardar" OnClick="BtnSave_Click" />
-        <asp:Button ID="BtnUpdate" runat="server" Text="Actualizar" OnClick="BtnUpdate_Click" />
-        <asp:Label ID="LblMsg" runat="server" Text=""></asp:Label>
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Gestión De Comentario</h1>
+
+        </div>
+        <!-- /.container-fluid -->
+
     </div>
-<h2>Lista de Comentarios</h2>
-    <table id="commentsTable" class="display" style="width: 100%">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Texto</th>
-                <th>Fecha</th>
-                <th>Clasificación</th>
-                <th>Cliente</th>
-                <th>Producto</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <form id="FrmComentario" runat="server">
+
+        <%-- Id --%>
+        <asp:HiddenField ID="HFCommentID" runat="server" />
+        <br />
+        <%--Texto--%>
+        <asp:Label ID="Label1" runat="server" Text="Ingrese el texto"></asp:Label>
+        <asp:TextBox ID="TBText" runat="server"></asp:TextBox>
+        <br />
+        <%-- Fecha --%>
+        <asp:Label ID="Label2" runat="server" Text="Ingrese la fecha"></asp:Label>
+        <asp:TextBox ID="TBDate" runat="server"></asp:TextBox>
+        <br />
+        <%-- Clasificación --%>
+        <asp:Label ID="Label3" runat="server" Text="Ingrese la clasificación"></asp:Label>
+        <asp:TextBox ID="TBClassification" runat="server"></asp:TextBox>
+        <br />
+        <%-- Cliente --%>
+        <asp:Label ID="Label4" runat="server" Text="Seleccione el cliente"></asp:Label>
+        <asp:DropDownList ID="DDLClient" runat="server"></asp:DropDownList>
+        <br />
+        <%-- Producto --%>
+        <asp:Label ID="Label5" runat="server" Text="Seleccione el producto"></asp:Label>
+        <asp:DropDownList ID="DDLProducto" runat="server"></asp:DropDownList>
+        <br />
+
+        <%-- Boton guardar --%>
+        <div>
+            <asp:Button ID="BtnSave" runat="server" Text="Guardar" OnClick="BtnSave_Click" />
+            <asp:Button ID="BtnUpdate" runat="server" Text="Actualizar" OnClick="BtnUpdate_Click" />
+            <asp:Label ID="LblMsg" runat="server" Text=""></asp:Label>
+        </div>
+    </form>
+    <asp:Panel ID="PanelAdmin" runat="server">
+
+        <h2>Lista de Comentarios</h2>
+        <table id="commentsTable" class="display" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Texto</th>
+                    <th>Fecha</th>
+                    <th>Clasificación</th>
+                    <th>Cliente</th>
+                    <th>Producto</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </asp:Panel>
 
     <script src="resources/js/datatables.min.js" type="text/javascript"></script>
 
     <%--Comentarios--%>
     <script type="text/javascript">
         $(document).ready(function () {
+            const showEditButton = '<%= _showEditButton %>' === 'True';
+            const showDeleteButton = '<%= _showDeleteButton %>' === 'True';
             $('#commentsTable').DataTable({
+                
                 "processing": true,
                 "serverSide": false,
                 "ajax": {
@@ -80,8 +100,14 @@
                     {
                         "data": null,
                         "render": function (data, type, row) {
-                            return `<button class="edit-btn" data-id="${row.CommentID}">Editar</button>
-                              <button class="delete-btn" data-id="${row.CommentID}">Eliminar</button>`;
+                            let buttons = '';
+                            if (showEditButton) {
+                                buttons += `<button class="btn btn-info edit-btn" data-id="${row.CommentID}">Editar</button>`;
+                            }
+                            if (showDeleteButton) {
+                                buttons += `<button class="btn btn-danger delete-btn" data-id="${row.CommentID}">Eliminar</button>`;
+                            }
+                            return buttons;
                         }
                     }
                 ],

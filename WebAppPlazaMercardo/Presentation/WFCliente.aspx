@@ -3,11 +3,22 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <%-- Estilos--%>
 
-<link href="resources/css/datatables.min.css" rel="stylesheet" />
-    </asp:Content>
+    <link href="resources/css/datatables.min.css" rel="stylesheet" />
+    <link href="resources/css/market-style.css" rel="stylesheet" />
+</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form>
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Gestión De Clientes</h1>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <form id="FrmCliente" runat="server">
 
         <%-- Id --%>
         <asp:HiddenField ID="HFClientID" runat="server" />
@@ -41,32 +52,37 @@
         </div>
         <br />
     </form>
-        
+
     <%--Lista de Clientes--%>
+    <asp:Panel ID="PanelAdmin" runat="server">
 
-    <h2>Lista de Clientes</h2>
-    <table id="clientsTable" class="display" style="width: 100%">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Correo</th>
-                <th>Telefono</th>
-                <th>Direccion</th>
+        <h2>Lista de Clientes</h2>
+        <table id="clientsTable" class="display" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Correo</th>
+                    <th>Telefono</th>
+                    <th>Direccion</th>
 
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-    
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </asp:Panel>
+
     <script src="resources/js/datatables.min.js" type="text/javascript"></script>
 
     <%--Clientes--%>
-<script type="text/javascript">
-    $(document).ready(function () {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            const showEditButton = '<%= _showEditButton %>' === 'True';
+        const showDeleteButton = '<%= _showDeleteButton %>' === 'True';
         $('#clientsTable').DataTable({
+
             "processing": true,
             "serverSide": false,
             "ajax": {
@@ -90,8 +106,14 @@
                 {
                     "data": null,
                     "render": function (data, type, row) {
-                        return `<button class="edit-btn" data-id="${row.ClientID}">Editar</button>
-                         <button class="delete-btn" data-id="${row.ClientID}">Eliminar</button>`;
+                        let buttons = '';
+                        if (showEditButton) {
+                            buttons += `<button class="btn btn-info edit-btn" data-id="${row.ClientID}">Editar</button>`;
+                        }
+                        if (showDeleteButton) {
+                            buttons += `<button class="btn btn-danger delete-btn" data-id="${row.ClientID}">Eliminar</button>`;
+                        }
+                        return buttons;
                     }
                 }
             ],
@@ -129,33 +151,33 @@
         });
     });
 
-    // Cargar los datos en los TextBox y DDL para actualizar
-    function loadClientData(rowData) {
-        $('#<%= HFClientID.ClientID %>').val(rowData.ClientID);
+        // Cargar los datos en los TextBox y DDL para actualizar
+        function loadClientData(rowData) {
+            $('#<%= HFClientID.ClientID %>').val(rowData.ClientID);
         $('#<%= TBName.ClientID %>').val(rowData.Name);
         $('#<%= TBlastname.ClientID %>').val(rowData.lastName);
         $('#<%= TBMail.ClientID %>').val(rowData.Mail);
         $('#<%= TBPhone.ClientID %>').val(rowData.Phone);
         $('#<%= TBAddres.ClientID %>').val(rowData.Addres);
-    }
-    // Función para eliminar un producto
-    function deleteClient(id) {
-        $.ajax({
-            type: "POST",
-            url: "WFCliente.aspx/DeleteClient",// Se invoca el WebMethod Eliminar un Producto
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ id: id }),
-            success: function (response) {
-                $('#clientsTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
-                alert("CLiente eliminado exitosamente.");
-            },
-            error: function () {
-                alert("Error al eliminar el Cliente.");
-            }
-        });
-    }
+        }
+        // Función para eliminar un producto
+        function deleteClient(id) {
+            $.ajax({
+                type: "POST",
+                url: "WFCliente.aspx/DeleteClient",// Se invoca el WebMethod Eliminar un Producto
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ id: id }),
+                success: function (response) {
+                    $('#clientsTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
+                    alert("CLiente eliminado exitosamente.");
+                },
+                error: function () {
+                    alert("Error al eliminar el Cliente.");
+                }
+            });
+        }
 
 
 
-</script>
+    </script>
 </asp:Content>

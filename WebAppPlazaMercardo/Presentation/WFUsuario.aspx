@@ -3,9 +3,20 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <%--Estilos--%>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
+    <link href="resources/css/Usuarios.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form>
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Gestión De Usuarios</h1>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <form id="FrmUsuarios" runat="server">
         <%--ID--%>
         <asp:HiddenField ID="HFUsuarioID" runat="server" />
         <br />
@@ -47,26 +58,31 @@
     </form>
 
     <%--LISTA DE USUARIOS--%>
+    <div class="ContenedorPrincipal">
+        <asp:Panel ID="PanelAdmin" runat="server">
 
-    <h2>Lista de Usuarios</h2>
-    <table id="UsuarioTable" class="display" style="width: 100%">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Correo</th>
-                <th>Contraseña</th>
-                <th>salt</th>
-                <th>Estado</th>
-                <th>Fecha Creación</th>
-                <th>FkRol</th>
-                <th>Rol</th>
-                <th>FkEmpleado</th>
-                <th>Empleado</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+            <h2>Lista de Usuarios</h2>
+            <table id="UsuarioTable" class="display" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Correo</th>
+                        <th>Contraseña</th>
+                        <th>salt</th>
+                        <th>Estado</th>
+                        <th>Fecha Creación</th>
+                        <th>FkRol</th>
+                        <th>Rol</th>
+                        <th>FkEmpleado</th>
+                        <th>Empleado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </asp:Panel>
+    </div>
+
 
 
     <%--DataTables--%>
@@ -75,6 +91,8 @@
     <%--Usuarios--%>
     <script type="text/javascript">
         $(document).ready(function () {
+            const showEditButton = '<%= _showEditButton %>' === 'True';
+            const showDeleteButton = '<%= _showDeleteButton %>' === 'True';
             $('#UsuarioTable').DataTable({
                 "processing": true,
                 "serverSide": false,
@@ -104,8 +122,14 @@
                     {
                         "data": null,
                         "render": function (row) {
-                            return `<button class="edit-btn" data-id="${row.UsuarioID}">Editar</button>
-                                 <button class="delete-btn" data-id="${row.UsuarioID}">Eliminar</button>`;
+                            let buttons = '';
+                            if (showEditButton) {
+                                buttons += `<button class="btn btn-info edit-btn" data-id="${row.UsuarioID}">Editar</button>`;
+                            }
+                            if (showDeleteButton) {
+                                buttons += `<button class="btn btn-danger delete-btn" data-id="${row.UsuarioID}">Eliminar</button>`;
+                            }
+                            return buttons;
                         }
                     }
                 ],

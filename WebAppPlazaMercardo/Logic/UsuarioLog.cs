@@ -21,7 +21,7 @@ namespace Logic
         }
         public User showUsersMail(string mail)
         {
-            return objUsu.showUserEmail(mail);
+            return objUsu.showUsersMail(mail);
         }
         public bool saveUsuario(string _email, string _password, string _salt, string _state, DateTime _Create_Date, int _fkrol, int _fkempleado)
         {
