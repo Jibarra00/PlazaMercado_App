@@ -38,5 +38,9 @@ namespace Logic
             return objUsu.deleteUsuario(_idUsuario);
 
         }
+        public int showCountUsers()
+        {
+            return objUsu.showCountUsers();
+        }
     }
 }

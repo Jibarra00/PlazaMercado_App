@@ -11,14 +11,46 @@ using System.Web.UI.WebControls;
 
 namespace Presentation
 {
-    public partial class WFInicio : System.Web.UI.Page
+    public partial class WFGraficas : System.Web.UI.Page
     {
         //Crear los objetos
         ProductoLog objPro = new ProductoLog();
+        UsuarioLog objUsu = new UsuarioLog();
+        EmpleadoLog objEmp = new EmpleadoLog();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (!IsPostBack)
+            {
+                showCountProducts();
+                showCountUsers();
+                showCountEmployee();
+
+            }
             validatePermisoRol();
+        }
+        [WebMethod]
+        public static object ListCountProductsCategories()
+        {
+            ProductoLog objProd = new ProductoLog();
+
+            // Se obtiene un DataSet que contiene la lista de productos que existen por categoria
+            var dataSet = objProd.showCountProductsCategories();
+
+            // Se crea una lista para almacenar las cantidades que de productos x categorias 
+            var prodCatList = new List<object>();
+
+            // Se itera sobre cada fila del DataSet.
+            foreach (DataRow row in dataSet.Tables[0].Rows)
+            {
+                prodCatList.Add(new
+                {
+                    CategoryName = row["Categoria"],
+                    TotalProducts = row["TotalProductos"],
+                });
+            }
+
+            // Devuelve un objeto en formato JSON que contiene la lista de productos x categorias.
+            return new { data = prodCatList };
         }
         private void validatePermisoRol()
         {
@@ -145,6 +177,26 @@ namespace Presentation
                 Response.Redirect("WFInicio.aspx");
             }
         }
-        
+
+
+        //Muestra cuantos productos existen
+        private void showCountProducts()
+        {
+            int count = objPro.showCountProducts();
+            LblCantProd.Text = count.ToString();
+        }
+        //Muestra cuantos usuarios existen
+        public void showCountUsers()
+        {
+            int count = objUsu.showCountUsers();
+            LblCantUsu.Text = count.ToString();
+        }
+        //Muestra cuantos empleados existen
+        public void showCountEmployee()
+        {
+            int count = objEmp.showCountEmployee();
+            LblCantEmp.Text = count.ToString();
+        }
+
     }
 }

@@ -41,5 +41,16 @@ namespace Logic
         {
             return objpro.deleteProducto(_idPro);
         }
+        //Metodo para mostrar cuantos productos existen por categoria
+        public DataSet showCountProductsCategories()
+        {
+            return objpro.showCountProductsCategories();
+        }
+
+        //Metodo para mostrar la cantidad de productos que existen
+        public int showCountProducts()
+        {
+            return objpro.showCountProducts();
+        }
     }
 }

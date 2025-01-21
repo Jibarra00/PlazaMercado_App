@@ -44,7 +44,10 @@ namespace Logic
         {
             return objEmp.deleteEmployee(e_id);
         }
-
+        public int showCountEmployee()
+        {
+            return objEmp.showCountEmployee();
+        }
     }
 }
   

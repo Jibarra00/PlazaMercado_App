@@ -168,6 +168,44 @@ namespace Data
             return executed;
 
         }
+        //Metodo para mostrar la cantidad de productos
+        public int showCountProducts()
+        {
+            int totalProductos;
+
+            MySqlCommand objSelectCmd = new MySqlCommand();
+            objSelectCmd.Connection = objPer.openConnection();
+            objSelectCmd.CommandText = "spSelectCountProducts";
+            objSelectCmd.CommandType = CommandType.StoredProcedure;
+
+            // Agregar el parámetro de salida
+            objSelectCmd.Parameters.Add(new MySqlParameter("@total_productos", MySqlDbType.Int32));
+            objSelectCmd.Parameters["@total_productos"].Direction = ParameterDirection.Output;
+
+            // Ejecutar el comando
+            objSelectCmd.ExecuteNonQuery();
+
+            // Obtener el valor del parámetro de salida
+            totalProductos = Convert.ToInt32(objSelectCmd.Parameters["@total_productos"].Value);
+
+            return totalProductos;
+        }
+
+        //Metodo para mostrar cuantos productos existen por categoria 
+        public DataSet showCountProductsCategories()
+        {
+            MySqlDataAdapter objAdapter = new MySqlDataAdapter();
+            DataSet objData = new DataSet();
+
+            MySqlCommand objSelectCmd = new MySqlCommand();
+            objSelectCmd.Connection = objPer.openConnection();
+            objSelectCmd.CommandText = "spSelectCountProductsCategories";
+            objSelectCmd.CommandType = CommandType.StoredProcedure;
+            objAdapter.SelectCommand = objSelectCmd;
+            objAdapter.Fill(objData);
+            objPer.closeConnection();
+            return objData;
+        }
 
     }
 

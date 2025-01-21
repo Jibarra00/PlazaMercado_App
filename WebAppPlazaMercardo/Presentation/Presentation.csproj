@@ -1822,6 +1822,7 @@
     <Content Include="WFComentario.aspx" />
     <Content Include="WFEmpleado.aspx" />
     <Content Include="WFGestion.aspx" />
+    <Content Include="WFGraficas.aspx" />
     <Content Include="WFInicio.aspx" />
     <Content Include="WFPedidos.aspx" />
     <Content Include="WFPermiso.aspx" />
@@ -1889,6 +1890,13 @@
     </Compile>
     <Compile Include="WFGestion.aspx.designer.cs">
       <DependentUpon>WFGestion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WFGraficas.aspx.cs">
+      <DependentUpon>WFGraficas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WFGraficas.aspx.designer.cs">
+      <DependentUpon>WFGraficas.aspx</DependentUpon>
     </Compile>
     <Compile Include="WFInicio.aspx.cs">
       <DependentUpon>WFInicio.aspx</DependentUpon>

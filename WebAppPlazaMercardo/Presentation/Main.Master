@@ -97,7 +97,7 @@
                             <a id="linkProveedor" runat="server" class="collapse-item" href="WFProveedor.aspx">Proveedores</a>
                             <a id="linkRol" runat="server" class="collapse-item" href="WFRol.aspx">Roles</a>
                             <a id="linkUsuario" runat="server" class="collapse-item" href="WFUsuario.aspx">Usuarios</a>
-                            
+
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Mas Paginas:</h6>
                             <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
@@ -126,7 +126,7 @@
                     <a class="collapse-item fas fa-check-circle" href="Logout.aspx">Cerrar Sesion</a>
                 </div>
 
-                
+
                 <hr class="sidebar-divider">
                 <!-- Heading -->
                 <div class="sidebar-heading">
@@ -136,9 +136,16 @@
 
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                        aria-expanded="true" aria-controls="collapseThree">
                         <i class="fas fa-fw fa-chart-area"></i>
                         <span>Charts</span></a>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Graficas</h6>
+                            <a id="linkGraficas" class="collapse-item" href="WFGraficas.aspx">Graficas</a>
+                        </div>
+                    </div>
                 </li>
 
                 <!-- Nav Item - Tables -->
@@ -373,7 +380,7 @@
 
 
         </div>
-        <!-- End of Content Wrapper -->
+<!-- End of Content Wrapper -->
 </div>
 <!-- End of Page Wrapper -->
 <!-- Footer -->

@@ -26,6 +26,7 @@ namespace Presentation
         public HtmlAnchor linkProveedor;
         public HtmlAnchor linkRol;
         public HtmlAnchor linkUsuario;
+        public HtmlAnchor linkGraficas;
         protected void Page_Load(object sender, EventArgs e)
         {
 

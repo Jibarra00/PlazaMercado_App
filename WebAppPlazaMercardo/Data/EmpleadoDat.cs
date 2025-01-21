@@ -140,5 +140,26 @@ namespace Data
             return executed;
 
         }
+        public int showCountEmployee()
+        {
+            int totalEmpleados;
+
+            MySqlCommand objSelectCmd = new MySqlCommand();
+            objSelectCmd.Connection = objPer.openConnection();
+            objSelectCmd.CommandText = "spSelectCountEmployee";
+            objSelectCmd.CommandType = CommandType.StoredProcedure;
+
+            // Agregar el parámetro de salida
+            objSelectCmd.Parameters.Add(new MySqlParameter("@total_empleados", MySqlDbType.Int32));
+            objSelectCmd.Parameters["@total_empleados"].Direction = ParameterDirection.Output;
+
+            // Ejecutar el comando
+            objSelectCmd.ExecuteNonQuery();
+
+            // Obtener el valor del parámetro de salida
+            totalEmpleados = Convert.ToInt32(objSelectCmd.Parameters["@total_empleados"].Value);
+
+            return totalEmpleados;
+        }
     }
 }

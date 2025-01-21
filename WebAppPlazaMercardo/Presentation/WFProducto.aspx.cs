@@ -189,7 +189,6 @@ namespace Presentation
                 masterPage.linkRol.Visible = false;
                 masterPage.linkCliente.Visible = false;
                 masterPage.linkEmpleado.Visible = false;
-                masterPage.linkPedidos.Visible = false;
                 masterPage.linkProveedor.Visible = false;
 
                 foreach (var permiso in objUser.Permisos)

@@ -231,5 +231,27 @@ namespace Data
             return executed;
 
         }
+        //Metodo para mostrar cuantos usuarios existen
+        public int showCountUsers()
+        {
+            int totalUsuarios;
+
+            MySqlCommand objSelectCmd = new MySqlCommand();
+            objSelectCmd.Connection = objPer.openConnection();
+            objSelectCmd.CommandText = "spSelectCountUsers";
+            objSelectCmd.CommandType = CommandType.StoredProcedure;
+
+            // Agregar el parámetro de salida
+            objSelectCmd.Parameters.Add(new MySqlParameter("@total_usuarios", MySqlDbType.Int32));
+            objSelectCmd.Parameters["@total_usuarios"].Direction = ParameterDirection.Output;
+
+            // Ejecutar el comando
+            objSelectCmd.ExecuteNonQuery();
+
+            // Obtener el valor del parámetro de salida
+            totalUsuarios = Convert.ToInt32(objSelectCmd.Parameters["@total_usuarios"].Value);
+
+            return totalUsuarios;
+        }
     }
 }
