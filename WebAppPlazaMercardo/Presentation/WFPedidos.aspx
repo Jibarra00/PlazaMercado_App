@@ -21,7 +21,7 @@
     <br />
     <%--fecha--%>
     <asp:Label ID="Label1" runat="server" Text="Ingrese la fecha (YYYY-MM-DD)"></asp:Label>
-    <asp:TextBox ID="TBFecha" runat="server"></asp:TextBox>
+    <asp:TextBox ID="TBFecha" runat="server" TextMode="Date"></asp:TextBox>
     <br />
     <%--estado--%>
     <asp:Label ID="Label2" runat="server" Text="Ingrese el estado"></asp:Label>

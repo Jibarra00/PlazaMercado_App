@@ -30,5 +30,9 @@ namespace Logic
         {
             return objPed.spDeletePedidos(_idPedidos);
         }
+        public List<ProductByDate> CountProductsByDate() 
+        {
+            return objPed.GetProductsByDate();
+        }
     }
 }

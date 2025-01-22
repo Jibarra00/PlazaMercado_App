@@ -1,4 +1,5 @@
-﻿using Logic;
+﻿using Data;
+using Logic;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Presentation
         ProductoLog objPro = new ProductoLog();
         UsuarioLog objUsu = new UsuarioLog();
         EmpleadoLog objEmp = new EmpleadoLog();
+        PedidosLog objPed = new PedidosLog();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -52,6 +54,8 @@ namespace Presentation
             // Devuelve un objeto en formato JSON que contiene la lista de productos x categorias.
             return new { data = prodCatList };
         }
+        
+
         private void validatePermisoRol()
         {
             // Se Obtiene el usuario actual desde la sesión
@@ -109,6 +113,7 @@ namespace Presentation
                 masterPage.linkCliente.Visible = false;
                 masterPage.linkEmpleado.Visible = false;
                 masterPage.linkRol.Visible = false;
+                
 
                 foreach (var permiso in objUser.Permisos)
                 {
@@ -178,6 +183,31 @@ namespace Presentation
             }
         }
 
+        [WebMethod]
+        public static object ListProductsByDate()
+        {
+            PedidosLog objPed = new PedidosLog();
+
+            List<ProductByDate> products = objPed.CountProductsByDate();
+            var productList = new List<object>();
+
+            // Iterar sobre los datos obtenidos y estructurarlos
+            foreach (var product in products)
+            {
+                productList.Add(new
+                {
+                    Fecha = product.Fecha.ToString("yyyy-MM-dd"), // Formato de fecha
+                    NombreProducto = product.NombreProducto,
+                    Cantidad = product.Cantidad
+                });
+            }
+
+            // Devolver un objeto en formato JSON
+            return new { data = productList };
+        }
+
+
+
 
         //Muestra cuantos productos existen
         private void showCountProducts()
@@ -197,6 +227,7 @@ namespace Presentation
             int count = objEmp.showCountEmployee();
             LblCantEmp.Text = count.ToString();
         }
+
 
     }
 }

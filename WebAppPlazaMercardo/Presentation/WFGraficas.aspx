@@ -52,34 +52,38 @@
                 </div>
             </div>
         </div>
-        <%--Grafica 1--%>
-        <div class="row">
-            <div class="col-6">
-                <div class="card border-info mb-3">
-                    <div class="card-header">
-                        <i class="lni lni-bar-chart-4"></i>
-                        Cantidad de productos por categoria
+
+        <div class="container-fluid" >
+            <%--Grafica 1--%>
+            <div class="row ">
+                <div class="col-6">
+                    <div class="card border-info mb-3">
+                        <div class="card-header">
+                            <i class="lni lni-bar-chart-4"></i>
+                            Cantidad de productos por categoria
+                        </div>
+                        <div class="card-body">
+                            <div id="piechart" style="width: 100%; height: 100%; min-height: 400px;"></div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div id="piechart" style="width: 100%; height: 100%; min-height: 400px;"></div>
+                </div>
+            </div>
+            <%--Grafica 2--%>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card border-info mb-3">
+                        <div class="card-header">
+                            <i class="lni lni-bar-chart-4"></i>
+                            Cantidad de productos por fecha
+                        </div>
+                        <div class="card-body">
+                            <div id="barchart" style="width: 100%; height: 500px;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <%--Grafica 2--%>
-        <div class="row">
-            <div class="col-6">
-                <div class="card border-info mb-3">
-                    <div class="card-header">
-                        <i class="lni lni-bar-chart-4"></i>
-                        Cantidad de usuarios y empleados 
-                    </div>
-                    <div class="card-body">
-                        <div id="barchart_values" style="width: 600px; height: 400px;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
     <%--JQuery--%>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
@@ -134,6 +138,64 @@
         // Redibuja la gráfica al redimensionar la ventana
         window.addEventListener('resize', fetchDataAndDrawChart);
     </script>
-   
+
+    <script>
+        // Cargar el paquete de Google Charts y dibujar el gráfico cuando esté listo
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(fetchDataAndDrawBarChart);
+
+        function fetchDataAndDrawBarChart() {
+            $.ajax({
+                url: 'WFGraficas.aspx/ListProductsByDate', // Ajusta con el nombre de tu archivo ASPX
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (response) {
+                    // Procesar los datos devueltos por el WebMethod
+                    var rawData = response.d.data;
+
+                    // Crear la tabla de datos para Google Charts
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Producto y Fecha'); // Combinamos producto y fecha en una columna
+                    data.addColumn('number', 'Cantidad'); // Cantidad en el eje horizontal
+
+                    // Llenar la tabla con los datos del WebMethod
+                    rawData.forEach(function (item) {
+                        // Asegurarse de que los tipos de datos sean correctos
+                        if (typeof item.NombreProducto === 'string' && typeof item.Cantidad === 'number' && typeof item.Fecha === 'string') {
+                            // Combinar la fecha y el nombre del producto
+                            var label = item.Fecha + " - " + item.NombreProducto;
+                            data.addRow([label, item.Cantidad]);
+                        }
+                    });
+
+                    // Configuración del gráfico
+                    var options = {
+                        title: 'Productos por Fecha',
+                        width: '100%',
+                        height: '500px',
+                        chartArea: { width: '80%', height: '70%' },
+                        vAxis: { title: 'Cantidad', minValue: 0 },
+                        hAxis: { title: 'Producto y Fecha' },
+                        bars: 'vertical', // Tipo de barras: horizontal
+                        legend: { position: 'none' }
+                    };
+
+                    // Dibujar la gráfica
+                    var chart = new google.visualization.ColumnChart(document.getElementById('barchart'));
+                    chart.draw(data, options);
+                },
+                error: function (error) {
+                    console.error('Error al obtener los datos: ', error);
+                }
+            });
+        }
+
+        // Redibuja la gráfica al redimensionar la ventana
+        window.addEventListener('resize', fetchDataAndDrawBarChart);
+    </script>
+
+
+
 
 </asp:Content>

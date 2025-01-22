@@ -37,6 +37,7 @@ namespace Presentation
                 //showPedidos();
                 showClienteDDL();
                 showProductoDDL();
+                TBFecha.Text = DateTime.Now.ToString("yyyy-MM-dd");
             }
             validatePermisoRol();
         }

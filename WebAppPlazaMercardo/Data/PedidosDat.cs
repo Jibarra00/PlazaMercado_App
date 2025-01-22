@@ -146,5 +146,43 @@ namespace Data
             return executed;
 
         }
+
+        public List<ProductByDate> GetProductsByDate()
+        {
+            List<ProductByDate> products = new List<ProductByDate>();
+
+            try
+            {
+                MySqlCommand objSelectCmd = new MySqlCommand();
+                objSelectCmd.Connection = objPer.openConnection();
+                objSelectCmd.CommandText = "spCountProductsByDate";
+                objSelectCmd.CommandType = CommandType.StoredProcedure;
+                using (MySqlDataReader reader = objSelectCmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        products.Add(new ProductByDate
+                        {
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            NombreProducto = reader["NombreProducto"].ToString(),
+                            Cantidad = Convert.ToInt32(reader["Cantidad"])
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los productos por fecha: " + ex.Message);
+            }
+
+            return products;
+        }
+    }
+
+    public class ProductByDate
+    {
+        public DateTime Fecha { get; set; }
+        public string NombreProducto { get; set; }
+        public int Cantidad { get; set; }
     }
 }
