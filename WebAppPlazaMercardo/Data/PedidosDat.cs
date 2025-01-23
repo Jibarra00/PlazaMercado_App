@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿        using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -177,12 +177,51 @@ namespace Data
 
             return products;
         }
+        public List<CategorySalesByDate> GetCategorySalesByDate()
+        {
+            List<CategorySalesByDate> sales = new List<CategorySalesByDate>();
+
+            try
+            {
+                MySqlCommand objSelectCmd = new MySqlCommand();
+                objSelectCmd.Connection = objPer.openConnection();
+                objSelectCmd.CommandText = "spCantidadProductosVendidosPorCategoria";
+                objSelectCmd.CommandType = CommandType.StoredProcedure;
+                using (MySqlDataReader reader = objSelectCmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        sales.Add(new CategorySalesByDate
+                        {
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Categoria = reader["Categoria"].ToString(),
+                            CantidadVendida = Convert.ToInt32(reader["CantidadVendida"])
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error en la capa de datos al obtener ventas por categoría: " + ex.Message);
+            }
+
+            return sales;
+        }
     }
 
-    public class ProductByDate
+
+
+public class ProductByDate
     {
         public DateTime Fecha { get; set; }
         public string NombreProducto { get; set; }
         public int Cantidad { get; set; }
     }
+
+public class CategorySalesByDate
+{
+    public DateTime Fecha { get; set; }
+    public string Categoria { get; set; }
+    public int CantidadVendida { get; set; }
+}
 }

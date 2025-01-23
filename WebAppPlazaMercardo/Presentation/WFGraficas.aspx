@@ -84,6 +84,20 @@
             </div>
         </div>
 
+        <div class="row">
+    <div class="col-6">
+        <div class="card border-info mb-3">
+            <div class="card-header">
+                <i class="lni lni-bar-chart-4"></i>
+                Ventas por Categoría a lo largo del Tiempo
+            </div>
+            <div class="card-body">
+                <div id="linechart" style="width: 100%; height: 500px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
     </div>
     <%--JQuery--%>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
@@ -194,6 +208,63 @@
         // Redibuja la gráfica al redimensionar la ventana
         window.addEventListener('resize', fetchDataAndDrawBarChart);
     </script>
+
+    <script>
+        // Cargar el paquete de Google Charts y dibujar el gráfico cuando esté listo
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(fetchDataAndDrawLineChart);
+
+        function fetchDataAndDrawLineChart() {
+            $.ajax({
+                url: 'WFGraficas.aspx/ListCategorySalesByDate',
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (response) {
+                    var rawData = response.d.data;
+
+                    // Crear la tabla de datos para Google Charts
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Fecha');
+                    data.addColumn('number', 'Cantidad');
+
+                    // Agrupar los datos por categoría y fechas
+                    var groupedData = {};
+                    rawData.forEach(function (item) {
+                        if (!groupedData[item.Categoria]) {
+                            groupedData[item.Categoria] = [];
+                        }
+                        groupedData[item.Categoria].push([item.Fecha, item.CantidadVendida]);
+                    });
+
+                    // Crear filas para cada categoría
+                    Object.keys(groupedData).forEach(function (category) {
+                        groupedData[category].forEach(function (entry) {
+                            data.addRow([entry[0] + " - " + category, entry[1]]);
+                        });
+                    });
+
+                    // Configuración del gráfico
+                    var options = {
+                        title: 'Ventas por Categoría a lo largo del Tiempo',
+                        width: '100%',
+                        height: '500px',
+                        hAxis: { title: 'Fecha' },
+                        vAxis: { title: 'Cantidad Vendida' },
+                        legend: { position: 'bottom' }
+                    };
+
+                    // Dibujar el gráfico
+                    var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+                    chart.draw(data, options);
+                },
+                error: function (error) {
+                    console.error('Error al obtener los datos: ', error);
+                }
+            });
+        }
+    </script>
+
 
 
 

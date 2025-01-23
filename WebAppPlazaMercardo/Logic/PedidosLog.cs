@@ -34,5 +34,9 @@ namespace Logic
         {
             return objPed.GetProductsByDate();
         }
+        public List<CategorySalesByDate> CountCategorySalesByDate()
+        {
+            return objPed.GetCategorySalesByDate();
+        }
     }
 }

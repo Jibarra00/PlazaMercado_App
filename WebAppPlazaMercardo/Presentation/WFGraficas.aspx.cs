@@ -54,7 +54,26 @@ namespace Presentation
             // Devuelve un objeto en formato JSON que contiene la lista de productos x categorias.
             return new { data = prodCatList };
         }
-        
+        [WebMethod]
+        public static object ListCategorySalesByDate()
+        {
+            PedidosLog objPed = new PedidosLog();
+            List<CategorySalesByDate> sales = objPed.CountCategorySalesByDate();
+            var salesList = new List<object>();
+
+            foreach (var sale in sales)
+            {
+                salesList.Add(new
+                {
+                    Fecha = sale.Fecha.ToString("yyyy-MM-dd"),
+                    Categoria = sale.Categoria,
+                    CantidadVendida = sale.CantidadVendida
+                });
+            }
+
+            return new { data = salesList };
+        }
+
 
         private void validatePermisoRol()
         {
