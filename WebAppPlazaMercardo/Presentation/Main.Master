@@ -116,7 +116,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Todo en Prodcutos:</h6>
                             <a class="collapse-item" href="WFProducto.aspx">Productos</a>
-                            <a class="collapse-item" href="WFProducto.aspx">Especificaciones</a>
+                            <a class="collapse-item" href="WFProductoCliente.aspx">Especificaciones</a>
                         </div>
                     </div>
                 </li>

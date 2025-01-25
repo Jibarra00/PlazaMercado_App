@@ -1828,6 +1828,7 @@
     <Content Include="WFPermiso.aspx" />
     <Content Include="WFPermisoRol.aspx" />
     <Content Include="WFProducto.aspx" />
+    <Content Include="WFProductoCliente.aspx" />
     <Content Include="WFProveedor.aspx" />
     <Content Include="WFRol.aspx" />
     <Content Include="WFUsuario.aspx" />
@@ -1932,6 +1933,13 @@
     </Compile>
     <Compile Include="WFProducto.aspx.designer.cs">
       <DependentUpon>WFProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WFProductoCliente.aspx.cs">
+      <DependentUpon>WFProductoCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WFProductoCliente.aspx.designer.cs">
+      <DependentUpon>WFProductoCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="WFProveedor.aspx.cs">
       <DependentUpon>WFProveedor.aspx</DependentUpon>
