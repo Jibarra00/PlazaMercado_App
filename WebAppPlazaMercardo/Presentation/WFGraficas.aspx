@@ -10,8 +10,8 @@
     <div class="container-fluid">
 
 
-        <div class="row">
-            <div class="col">
+        <div class="row justify-content-center text-center">
+            <div class="col-md-3">
                 <div class="card border-success mb-3" style="max-width: 18rem;">
                     <div class="card-body text-success">
                         <h5 class="card-title">Total Usuarios</h5>
@@ -19,12 +19,12 @@
                     </div>
                     <div class="card-footer bg-transparent border-success text-center">
                         <a class="small-box-footer" href="WFUsuario.aspx">Mas info
-            <i class="lni lni-chevron-right-circle"></i>
+                            <i class="lni lni-chevron-right-circle"></i>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-3">
                 <div class="card border-success mb-3" style="max-width: 18rem;">
                     <div class="card-body text-success">
                         <h5 class="card-title">Total Empleados</h5>
@@ -32,12 +32,12 @@
                     </div>
                     <div class="card-footer bg-transparent border-success text-center">
                         <a class="small-box-footer" href="WFEmpleado.aspx">Mas info
-             <i class="lni lni-chevron-right-circle"></i>
+                             <i class="lni lni-chevron-right-circle"></i>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-3">
                 <div class="card border-success mb-3" style="max-width: 18rem;">
                     <div class="card-body text-success">
                         <h5 class="card-title">Total Productos</h5>
@@ -46,57 +46,60 @@
                     </div>
                     <div class="card-footer bg-transparent border-success text-center">
                         <a class="small-box-footer" href="WFProducto.aspx">Mas info
-        <i class="lni lni-chevron-right-circle"></i>
+                             <i class="lni lni-chevron-right-circle"></i>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="container-fluid" >
-            <%--Grafica 1--%>
-            <div class="row ">
-                <div class="col-6">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Gráfica 1 -->
+                <div class="col-md-6">
                     <div class="card border-info mb-3">
                         <div class="card-header">
                             <i class="lni lni-bar-chart-4"></i>
-                            Cantidad de productos por categoria
+                            Cantidad de productos por categoría
                         </div>
                         <div class="card-body">
-                            <div id="piechart" style="width: 100%; height: 100%; min-height: 400px;"></div>
+                            <div id="piechart" style="width: 100%; height: 400px;"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <%--Grafica 2--%>
-            <div class="row">
-                <div class="col-6">
+
+                <!-- Gráfica 2 -->
+                <div class="col-md-6">
                     <div class="card border-info mb-3">
                         <div class="card-header">
                             <i class="lni lni-bar-chart-4"></i>
                             Cantidad de productos por fecha
                         </div>
                         <div class="card-body">
-                            <div id="barchart" style="width: 100%; height: 500px;"></div>
+                            <div id="barchart" style="width: 100%; height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfica 3 -->
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card border-info mb-3">
+                        <div class="card-header">
+                            <i class="lni lni-bar-chart-4"></i>
+                            Ventas por Categoría a lo largo del Tiempo
+                        </div>
+                        <div class="card-body">
+                            <div id="linechart" style="width: 100%; height: 400px;"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-    <div class="col-6">
-        <div class="card border-info mb-3">
-            <div class="card-header">
-                <i class="lni lni-bar-chart-4"></i>
-                Ventas por Categoría a lo largo del Tiempo
-            </div>
-            <div class="card-body">
-                <div id="linechart" style="width: 100%; height: 500px;"></div>
-            </div>
-        </div>
-    </div>
-</div>
+
+
 
     </div>
     <%--JQuery--%>
