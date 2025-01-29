@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="WFPedidos.aspx.cs" Inherits="Presentation.WFPedidos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <%--Estilos--%>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
     <link href="resources/css/Pedidos.css" rel="stylesheet" />
@@ -145,9 +146,26 @@
             // Eliminar un pedido
             $('#PedidosTable').on('click', '.delete-btn', function () {
                 const id = $(this).data('id');// Obtener el ID del pedido
-                if (confirm("¿Estás seguro de que deseas eliminar este pedido?")) {
-                    DeletePedido(id);// Invoca a la función para eliminar el pedido
-                }
+                //if (confirm("¿Estás seguro de que deseas eliminar este pedido?")) {
+                //    DeletePedido(id);// Invoca a la función para eliminar el pedido
+                //}
+                swal({
+                    title: "Esta seguro?",
+                    text: "Precaución se eliminará permanentemente!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            DeletePedido(id);// Invoca a la función para eliminar el consultorio
+                            swal("Poof! Pedido Eliminado exitosamente!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("No se eliminó el pedido!");
+                        }
+                    });
             });
         });
 
@@ -170,10 +188,12 @@
                 data: JSON.stringify({ id: id }),
                 success: function (response) {
                     $('#PedidosTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
-                    alert("El pedido fue eliminado exitosamente.");
+                    swal('Exitoso', 'Se eliminó el pedido', 'success');
+                    //alert("El pedido fue eliminado exitosamente.");
                 },
                 error: function () {
-                    alert("Error al eliminar el pedido.");
+                    swal('Error', 'Error al eliminar el pedido', 'error');
+                    //alert("Error al eliminar el pedido.");
                 }
             });
         }

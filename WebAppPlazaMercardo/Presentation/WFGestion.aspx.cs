@@ -33,6 +33,7 @@ namespace Presentation
                 BtnUpdate.Visible = false;
                 FrmGestion.Visible = false;
                 PanelAdmin.Visible = false;
+                TBDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 //showManagement();
                 showEmployeesDDL();
                 showProductsDDL();
@@ -56,8 +57,10 @@ namespace Presentation
                     ManagementID = row["ges_id"],
                     Description = row["ges_descripcion"],
                     Date = Convert.ToDateTime(row["ges_fecha"]).ToString("yyyy-MM-dd"),
-                    Employee = row["tbl_empleado_emp_id"],
-                    Product = row["tbl_producto_pro_id"],
+                    FKEmployee = row["tbl_empleado_emp_id"],
+                    Employee = row["emp_nombres"],
+                    FKProduct = row["tbl_producto_pro_id"],
+                    Product = row["pro_descripcion"],
                 });
             }
             // Devuelve un objeto en formato JSON que contiene la lista de productos.
@@ -233,13 +236,15 @@ namespace Presentation
         {
             DDLEmployee.DataSource = objEmp.showEmployeesDDL();
             DDLEmployee.DataValueField = "emp_id"; //Nombre de la llave primaria
+            DDLEmployee.DataTextField = "emp_nombres";
             DDLEmployee.DataBind();
             DDLEmployee.Items.Insert(0, "Seleccione");
         }
         private void showProductsDDL()
         {
             DDLProduct.DataSource = objPro.showProductoDDL();
-            DDLProduct.DataValueField = "pro_id"; //Nombre de la llave primaria
+            DDLProduct.DataValueField = "pro_id";
+            DDLProduct.DataTextField = "codigoDescripcion"; //Nombre de la llave primaria
             DDLProduct.DataBind();
             DDLProduct.Items.Insert(0, "Seleccione");
         }
@@ -251,43 +256,50 @@ namespace Presentation
             _fkemployee = Convert.ToInt32(DDLEmployee.SelectedValue);
             _fkproduct = Convert.ToInt32(DDLProduct.SelectedValue);
 
-            executed = objGes.saveManagement(p_ges_descripcion, p_ges_fecha, _fkemployee, _fkproduct);
+            executed = objGes.saveManagement(p_ges_fecha, p_ges_descripcion, _fkemployee, _fkproduct);
 
             if (executed)
             {
-                LblMsg.Text = "Se guardó la gestión exitosamente!";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se guardo la gestión exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
+                clear();
             }
             else
             {
-                LblMsg.Text = "Error al guardar";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al guardar la gestión', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
             }
         }
 
         protected void BtnUpdate_Click(object sender, EventArgs e)
         {
-            {
-                // Verifica si se ha seleccionado un producto para actualizar
+            // Verifica si se ha seleccionado un producto para actualizar
                 if (string.IsNullOrEmpty(HFManagementID.Value))
                 {
                     LblMsg.Text = "No se ha seleccionado una gestión para actualizar.";
                     return;
                 }
                 p_ges_id = Convert.ToInt32(HFManagementID.Value);
-                p_ges_descripcion = TBDescription.Text;
                 p_ges_fecha = DateTime.Parse(TBDate.Text);
+                p_ges_descripcion = TBDescription.Text;
                 _fkemployee = Convert.ToInt32(DDLEmployee.SelectedValue);
                 _fkproduct = Convert.ToInt32(DDLProduct.SelectedValue);
-                executed = objGes.updateManagement(p_ges_id,p_ges_fecha,p_ges_descripcion);
+                executed = objGes.updateManagement(p_ges_id,p_ges_fecha,p_ges_descripcion,_fkemployee,_fkproduct);
                 if (executed)
                 {
-                    LblMsg.Text = "La gestión se actualizó exitosamente!";
-                    clear(); //Se invoca el metodo para limpiar los campos 
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                     "swal('Exitoso', 'Se actualizo la gestión exitosamente', 'success')", true);
+                    //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
+                    clear();
                 }
                 else
                 {
-                    LblMsg.Text = "Error al actualizar";
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                    "swal('Error', 'Error al actualizar la gestión', 'error')", true);
+                    //LblMsg.Text = "Error al guardar";
                 }
-            }
         }
     }
 }

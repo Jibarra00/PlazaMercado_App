@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="WFPermisoRol.aspx.cs" Inherits="Presentation.WFPermisoRol" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -138,9 +139,26 @@
             // Eliminar un producto
             $('#permisosRolesTable').on('click', '.delete-btn', function () {
                 const id = $(this).data('id');// Obtener el ID del producto
-                if (confirm("¿Estás seguro de que deseas eliminar este Permiso Rol?")) {
-                    DeletePermisosRol(id);// Invoca a la función para eliminar el producto
-                }
+                //if (confirm("¿Estás seguro de que deseas eliminar este Permiso Rol?")) {
+                //    DeletePermisosRol(id);// Invoca a la función para eliminar el producto
+                //}
+                swal({
+                    title: "Esta seguro?",
+                    text: "Precaución se eliminará permanentemente!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            DeletePermisosRol(id);// Invoca a la función para eliminar el consultorio
+                            swal("Poof!Eliminado exitosamente!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("No se eliminó!");
+                        }
+                    });
             });
         });
 
@@ -161,10 +179,12 @@
                 data: JSON.stringify({ id: id }),
                 success: function (response) {
                     $('#productsTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
-                    alert("Permiso Rol eliminado exitosamente.");
+                    swal('Exitoso', 'Se eliminó Correctamente', 'success');
+                    //alert("Permiso Rol eliminado exitosamente.");
                 },
                 error: function () {
-                    alert("Error al eliminar el Permiso Rol.");
+                    swal('Error', 'Error al eliminar', 'error');
+                    //alert("Error al eliminar el Permiso Rol.");
                 }
             });
         }

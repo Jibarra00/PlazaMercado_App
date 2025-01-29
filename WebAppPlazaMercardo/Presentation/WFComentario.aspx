@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="WFComentario.aspx.cs" Inherits="Presentation.WFComentario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <%-- Estilos --%>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
     <link href="resources/css/Comentario.css" rel="stylesheet" />
@@ -23,11 +24,11 @@
         <br />
         <%--Texto--%>
         <asp:Label ID="Label1" runat="server" Text="Ingrese el texto"></asp:Label>
-        <asp:TextBox ID="TBText" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TBText" runat="server" placeholder="Ingresa tu comentario del producto"></asp:TextBox>
         <br />
         <%-- Fecha --%>
         <asp:Label ID="Label2" runat="server" Text="Ingrese la fecha"></asp:Label>
-        <asp:TextBox ID="TBDate" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TBDate" runat="server" TextMode="Date"></asp:TextBox>
         <br />
         <%-- Clasificación --%>
         <asp:Label ID="Label3" runat="server" Text="Ingrese la clasificación"></asp:Label>
@@ -46,7 +47,7 @@
         <div>
             <asp:Button ID="BtnSave" runat="server" Text="Guardar" OnClick="BtnSave_Click" />
             <asp:Button ID="BtnUpdate" runat="server" Text="Actualizar" OnClick="BtnUpdate_Click" />
-            <asp:Label ID="LblMsg" runat="server" Text=""></asp:Label>
+            <asp:Label ID="LblMsg" runat="server" Text="" CssClass="form-text text-success"></asp:Label>
         </div>
     </form>
     <asp:Panel ID="PanelAdmin" runat="server">
@@ -59,7 +60,9 @@
                     <th>Texto</th>
                     <th>Fecha</th>
                     <th>Clasificación</th>
+                    <th>FKClient</th>
                     <th>Cliente</th>
+                    <th>FKProduct</th>
                     <th>Producto</th>
                 </tr>
             </thead>
@@ -95,8 +98,11 @@
                     { "data": "Text" },
                     { "data": "Date" },
                     { "data": "Classification" },
+                    { "data": "FKClient", "visible": false },
                     { "data": "Client" },
+                    { "data": "FKProduct", "visible": false },
                     { "data": "Product" },
+
                     {
                         "data": null,
                         "render": function (data, type, row) {
@@ -138,9 +144,26 @@
             // Eliminar un producto
             $('#commentsTable').on('click', '.delete-btn', function () {
                 const id = $(this).data('id');// Obtener el ID de la categoria
-                if (confirm("¿Estás seguro de que deseas eliminar este comentario?")) {
-                    deleteComment(id);// Invoca a la función para eliminar el producto
-                }
+                //if (confirm("¿Estás seguro de que deseas eliminar este comentario?")) {
+                //    deleteComment(id);// Invoca a la función para eliminar el producto
+                //}
+                swal({
+                    title: "Esta seguro?",
+                    text: "Precaución se eliminará permanentemente!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            deleteComment(id);// Invoca a la función para eliminar el consultorio
+                            swal("Poof! Comentario Eliminado exitosamente!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("No se eliminó el Comentario!");
+                        }
+                    });
             });
         });
         // Cargar los datos en los TextBox y DDL para actualizar
@@ -161,10 +184,12 @@
                 data: JSON.stringify({ id: id }),
                 success: function (response) {
                     $('#commentsTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
-                    alert("Comentario eliminada exitosamente.");
+                    swal('Exitoso', 'Se eliminó el comentario', 'success');
+                    //alert("Comentario eliminada exitosamente.");
                 },
                 error: function () {
-                    alert("Error al eliminar el comentario.");
+                    swal('Error', 'Error al eliminar el comentario', 'error');
+                    //alert("Error al eliminar el comentario.");
                 }
             });
         }

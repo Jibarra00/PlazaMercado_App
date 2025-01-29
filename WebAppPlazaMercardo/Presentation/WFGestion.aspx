@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="WFGestion.aspx.cs" Inherits="Presentation.WFGestion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <%-- Estilos --%>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
     <link href="resources/css/Gestion2.css" rel="stylesheet" />
@@ -23,7 +24,7 @@
     <br />
     <%-- Fecha --%>
     <asp:Label ID="Label1" runat="server" Text="Ingrese la fecha"></asp:Label>
-    <asp:TextBox ID="TBDate" runat="server"></asp:TextBox>
+    <asp:TextBox ID="TBDate" runat="server" TextMode="Date"></asp:TextBox>
     <br />
     <%--Descripción--%>
     <asp:Label ID="Label2" runat="server" Text="Ingrese la descripción"></asp:Label>
@@ -89,7 +90,9 @@
                     { "data": "ManagementID" },
                     { "data": "Date" },
                     { "data": "Description" },
+                    { "data": "FKEmployee", "visible": false },
                     { "data": "Employee" },
+                    { "data": "FKProduct", "visible": false },
                     { "data": "Product" },
                     {
                         "data": null,
@@ -130,18 +133,35 @@
             // Eliminar un producto
             $('#managementTable').on('click', '.delete-btn', function () {
                 const id = $(this).data('id');// Obtener el ID de la categoria
-                if (confirm("¿Estás seguro de que deseas eliminar esta gestión?")) {
-                    deleteManagement(id);// Invoca a la función para eliminar el producto
-                }
+                //if (confirm("¿Estás seguro de que deseas eliminar esta gestión?")) {
+                //    deleteManagement(id);// Invoca a la función para eliminar el producto
+                //}
+                swal({
+                    title: "Esta seguro?",
+                    text: "Precaución se eliminará permanentemente!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            deleteManagement(id);// Invoca a la función para eliminar el consultorio
+                            swal("Poof! Gestión Eliminado exitosamente!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("No se eliminó La Gestión!");
+                        }
+                    });
             });
         });
         // Cargar los datos en los TextBox y DDL para actualizar
         function loadManagementData(rowData) {
             $('#<%= HFManagementID.ClientID %>').val(rowData.ManagementID);
-            $('#<%= TBDescription.ClientID %>').val(rowData.Text);
+            $('#<%= TBDescription.ClientID %>').val(rowData.Description);
             $('#<%= TBDate.ClientID %>').val(rowData.Date);
-            $('#<%= DDLEmployee.ClientID %>').val(rowData.Client);
-            $('#<%= DDLProduct.ClientID %>').val(rowData.Product);
+            $('#<%= DDLEmployee.ClientID %>').val(rowData.FKEmployee);
+            $('#<%= DDLProduct.ClientID %>').val(rowData.FKProduct);
         }
         // Función para eliminar un producto
         function deleteManagement(id) {
@@ -152,10 +172,12 @@
                 data: JSON.stringify({ id: id }),
                 success: function (response) {
                     $('#managementTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
-                    alert("Gestión eliminado exitosamente.");
+                    swal('Exitoso', 'Se eliminó la gestón', 'success');
+                    /*alert("Gestión eliminado exitosamente.");*/
                 },
                 error: function () {
-                    alert("Error al eliminar la gestión");
+                    swal('Error', 'Error al eliminar la gestión', 'error');
+                    /*alert("Error al eliminar la gestión");*/
                 }
             });
         }

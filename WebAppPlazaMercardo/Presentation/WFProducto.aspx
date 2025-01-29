@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="WFProducto.aspx.cs" Inherits="Presentation.WFProducto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
     <link href="resources/css/Inventario.css" rel="stylesheet" />
 </asp:Content>
@@ -151,9 +152,26 @@
             // Eliminar un producto
             $('#productsTable').on('click', '.delete-btn', function () {
                 const id = $(this).data('id');// Obtener el ID del producto
-                if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
-                    deleteProducto(id);// Invoca a la función para eliminar el producto
-                }
+                //if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+                //    deleteProducto(id);// Invoca a la función para eliminar el producto
+                //}
+                swal({
+                    title: "Esta seguro?",
+                    text: "Precaución se eliminará permanentemente!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            DeleteProduct(id);
+                            swal("Poof!Eliminado el producto exitosamente!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("No se eliminó!");
+                        }
+                    });
             });
         });
 
@@ -169,7 +187,7 @@
         }
 
         // Función para eliminar un producto
-        function deleteProduct(id) {
+        function DeleteProduct(id) {
             $.ajax({
                 type: "POST",
                 url: "WFProducto.aspx/DeleteProduct",// Se invoca el WebMethod Eliminar un Producto
@@ -177,10 +195,12 @@
                 data: JSON.stringify({ id: id }),
                 success: function (response) {
                     $('#productsTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
-                    alert("Producto eliminado exitosamente.");
+                    swal('Exitoso', 'Se eliminó el producto Correctamente', 'success');
+                    //alert("Producto eliminado exitosamente.");
                 },
                 error: function () {
-                    alert("Error al eliminar el producto.");
+                    swal('Error', 'Error al eliminar el producto', 'error');
+                    //alert("Error al eliminar el producto.");
                 }
             });
         }

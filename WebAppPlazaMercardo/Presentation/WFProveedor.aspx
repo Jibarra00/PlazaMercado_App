@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="WFProveedor.aspx.cs" Inherits="Presentation.WFProveedor" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
     <link href="resources/css/Proveedor.css" rel="stylesheet" />
 </asp:Content>
@@ -126,9 +127,26 @@
             // Eliminar un proveedor
             $('#proveedorTable').on('click', '.delete-btn', function () {
                 const id = $(this).data('id');// Obtener el ID del proveedor
-                if (confirm("¿Estás seguro de que deseas eliminar este proveedor?")) {
-                    DeleteProveedor(id);// Invoca a la función para eliminar el proveedor
-                }
+                //if (confirm("¿Estás seguro de que deseas eliminar este proveedor?")) {
+                //    DeleteProveedor(id);// Invoca a la función para eliminar el proveedor
+                //}
+                swal({
+                    title: "Esta seguro?",
+                    text: "Precaución se eliminará permanentemente!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            DeleteProveedor(id);// Invoca a la función para eliminar el consultorio
+                            swal("Poof!Eliminado el proveedor  exitosamente!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("No se eliminó el proveedor!");
+                        }
+                    });
             });
         });
 
@@ -149,10 +167,12 @@
                 data: JSON.stringify({ id: id }),
                 success: function (response) {
                     $('#proveedorTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
-                    alert("Proveedor eliminado exitosamente.");
+                    swal('Exitoso', 'Se eliminó Correctamente', 'success');
+                    //alert("Proveedor eliminado exitosamente.");
                 },
                 error: function () {
-                    alert("Error al eliminar el proveedor.");
+                    swal('Error', 'Error al eliminar', 'error');
+                    //alert("Error al eliminar el proveedor.");
                 }
             });
         }

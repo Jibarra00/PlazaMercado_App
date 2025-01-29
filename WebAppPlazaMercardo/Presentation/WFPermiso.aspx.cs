@@ -232,12 +232,16 @@ namespace Presentation
             executed = objPer.savePermiso(_name, _description);
             if (executed)
             {
-                LblMsg.Text = "Se guardo correctamente";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se guardo el permiso exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
                 clear();
             }
             else
             {
-                LblMsg.Text = "Error al guardar ";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al guardar el permiso', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
             }
         }
 
@@ -257,12 +261,16 @@ namespace Presentation
 
             if (executed)
             {
-                LblMsg.Text = "Se actualizo correctamente";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se actializo el permiso exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
                 clear();
             }
             else
             {
-                LblMsg.Text = "Error al actualizar ";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al actualizar el permiso', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
             }
         }
 

@@ -282,12 +282,16 @@ namespace Presentation
 
             if (executed)
             {
-                LblMsg.Text = "El Empleado se actualizó exitosamente!";
-                clear(); // Limpiar los campos después de actualizar
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se actualizo el Empleado exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
+                clear();
             }
             else
             {
-                LblMsg.Text = "Error al actualizar.";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al actualizar el Empleado', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
             }
         }
 
@@ -304,11 +308,16 @@ namespace Presentation
                 executed = objEmp.saveEmployee(_identification, _names, _lastnames, _phone, _addres);
                 if (executed)
                 {
-                    LblMsg.Text = "El Empleado se guardo exitosamente";
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                     "swal('Exitoso', 'Se guardo el Empleado exitosamente', 'success')", true);
+                    //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
+                    clear();
                 }
                 else
                 {
-                    LblMsg.Text = "Error al Guardar";
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                    "swal('Error', 'Error al guardar', 'error')", true);
+                    //LblMsg.Text = "Error al guardar";
                 }
 
 

@@ -231,12 +231,16 @@ namespace Presentation
 
             if (executed)
             {
-                LblMsg.Text = "La descripción de la categoría ha sido guardada exitosamente!";
-               
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se registró la categoria exitosamente', 'success')", true);
+                //LblMsg.Text = "La descripción de la categoría ha sido guardada exitosamente!";
+               clear();
             }
             else
             {
-                LblMsg.Text = "Error al guardar :(!";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al guardar la categoria', 'error')", true);
+                //LblMsg.Text = "Error al guardar :(!";
             }
         }
 

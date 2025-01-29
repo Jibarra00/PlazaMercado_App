@@ -43,7 +43,7 @@ namespace Data
         }
 
         //Metodo para guardar una nueva gestion
-        public bool saveManagement(string p_ges_descripcion, DateTime p_ges_fecha, int _fkemployee, int _fkproduct)
+        public bool saveManagement(DateTime p_ges_fecha, string p_ges_descripcion,  int _fkemployee, int _fkproduct)
         {
             bool executed = false;
             int row;
@@ -77,7 +77,7 @@ namespace Data
         }
 
         //Metodo para actualizar una gestion
-        public bool updateManagement(int p_ges_id, DateTime p_ges_fecha, string p_ges_descripcion)
+        public bool updateManagement(int p_ges_id, DateTime p_ges_fecha, string p_ges_descripcion, int _fkemployee, int _fkproduct)
         {
             bool executed = false;
             int row;
@@ -89,6 +89,8 @@ namespace Data
             objSelectCmd.Parameters.Add("g_id", MySqlDbType.Int32).Value = p_ges_id;
             objSelectCmd.Parameters.Add("g_fecha", MySqlDbType.DateTime).Value = p_ges_fecha;
             objSelectCmd.Parameters.Add("g_descripcion", MySqlDbType.VarString).Value = p_ges_descripcion;
+            objSelectCmd.Parameters.Add("tbl_empleado_emp_id", MySqlDbType.Int32).Value = _fkemployee;
+            objSelectCmd.Parameters.Add("tbl_producto_pro_id", MySqlDbType.Int32).Value = _fkproduct;
 
 
             try

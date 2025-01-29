@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="WFUsuario.aspx.cs" Inherits="Presentation.WFUsuario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <%--Estilos--%>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
     <link href="resources/css/Usuarios.css" rel="stylesheet" />
@@ -161,9 +162,26 @@
             // Eliminar un usuario
             $('#UsuarioTable').on('click', '.delete-btn', function () {
                 const id = $(this).data('id');// Obtener el ID del usuario
-                if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
-                    DeleteUsuario(id);// Invoca a la función para eliminar el producto
-                }
+                //if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
+                //    DeleteUsuario(id);// Invoca a la función para eliminar el producto
+                //}
+                swal({
+                    title: "Esta seguro?",
+                    text: "Precaución se eliminará permanentemente!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            DeleteUsuario(id);// Invoca a la función para eliminar el consultorio
+                            swal("Poof!Eliminado el usuario exitosamente!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("No se eliminó el usuario!");
+                        }
+                    });
             });
         });
 
@@ -188,10 +206,12 @@
                 data: JSON.stringify({ id: id }),
                 success: function (response) {
                     $('#UsuarioTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
-                    alert("El usuario se ha eliminado exitosamente.");
+                    swal('Exitoso', 'Se eliminó el usuario Correctamente', 'success');
+                    //alert("El usuario se ha eliminado exitosamente.");
                 },
                 error: function () {
-                    alert("Error al eliminar el usuario.");
+                    swal('Error', 'Error al eliminar', 'error');
+                    //alert("Error al eliminar el usuario.");
                 }
             });
         }

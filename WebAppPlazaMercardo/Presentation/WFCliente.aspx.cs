@@ -259,12 +259,15 @@ namespace Presentation
 
             if (executed)
             {
-                LblMsg.Text = "El cliente se actualizo exitosamente!";
-                clear(); //Se invoca el metodo para limpiar los campos 
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se actualizo el cliente exitosamente', 'success')", true);
+                //LblMsg.Text = "El CLiente se guardo exitosamente";
             }
             else
             {
-                LblMsg.Text = "Error al actualizar";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al actualizar el cliente', 'error')", true);
+                //LblMsg.Text = "Error al Guardar";
             }
         }
 
@@ -279,11 +282,15 @@ namespace Presentation
             executed = objCli.saveClient(_names, _lastnames, _mail, _phone, _addres);
             if (executed)
             {
-                LblMsg.Text = "El CLiente se guardo exitosamente";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se registró el cliente exitosamente', 'success')", true);
+                //LblMsg.Text = "El CLiente se guardo exitosamente";
             }
             else
             {
-                LblMsg.Text = "Error al Guardar";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al guardar el cliente', 'error')", true);
+                //LblMsg.Text = "Error al Guardar";
             }
 
         }

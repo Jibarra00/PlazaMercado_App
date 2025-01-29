@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="WFRol.aspx.cs" Inherits="Presentation.WFRol" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
     <link href="resources/css/Rol.css" rel="stylesheet" />
 </asp:Content>
@@ -126,9 +126,26 @@
             // Eliminar un rol
             $('#RolTable').on('click', '.delete-btn', function () {
                 const id = $(this).data('id');// Obtener el ID del producto
-                if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
-                    DeleteRol(id);// Invoca a la función para eliminar el producto
-                }
+                //if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+                //    DeleteRol(id);// Invoca a la función para eliminar el producto
+                //}
+                swal({
+                    title: "Esta seguro?",
+                    text: "Precaución se eliminará permanentemente!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            DeleteRol(id);// Invoca a la función para eliminar el consultorio
+                            swal("Poof!Eliminado el rol exitosamente!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("No se eliminó el rol!");
+                        }
+                    });
             });
         });
 
@@ -148,10 +165,12 @@
                 data: JSON.stringify({ id: id }),
                 success: function (response) {
                     $('#RolTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
-                    alert("Rol eliminado exitosamente.");
+                    swal('Exitoso', 'Se eliminó el rol Correctamente', 'success');
+                    //alert("Rol eliminado exitosamente.");
                 },
                 error: function () {
-                    alert("Error al eliminar el Rol.");
+                    swal('Error', 'Error al eliminar el rol', 'error');
+                    //alert("Error al eliminar el Rol.");
                 }
             });
         }

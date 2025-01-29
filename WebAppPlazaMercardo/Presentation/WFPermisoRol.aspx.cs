@@ -260,12 +260,16 @@ namespace Presentation
 
             if (executed)
             {
-                LblMsg.Text = "El permiso rol se guardo exitosamente!";
-                clear();//Se invoca el metodo para limpiar los campos 
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se guardo exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
+                clear();
             }
             else
             {
-                LblMsg.Text = "Error al guardar";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al guardar', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
             }
         }
 
@@ -287,12 +291,16 @@ namespace Presentation
 
             if (executed)
             {
-                LblMsg.Text = "El permiso rol se actualizo exitosamente!";
-                clear();//Se invoca el metodo para limpiar los campos 
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se guardo exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
+                clear();
             }
             else
             {
-                LblMsg.Text = "Error al actualizo";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al guardar', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
             }
         }
     }

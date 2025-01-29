@@ -34,6 +34,7 @@ namespace Presentation
                 BtnUpdate.Visible = false;
                 PanelAdmin.Visible = false;
                 FrmComentario.Visible = false;
+                TBDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 //showComment();
                 //showCommentDDL();
                 showClientsDDL();
@@ -61,8 +62,10 @@ namespace Presentation
                     Text = row["com_text"],
                     Date = Convert.ToDateTime(row["com_fecha"]).ToString("yyyy-MM-dd"),
                     Classification = row["com_clasificacion"],
-                    Client = row["tbl_cliente_cli_id"],
-                    Product = row["tbl_producto_pro_id"],
+                    FKClient = row["tbl_cliente_cli_id"],
+                    Client = row["cli_nombres"],
+                    FKProduct = row["tbl_producto_pro_id"],
+                    Product = row["pro_descripcion"],
                 });
             }
             // Devuelve un objeto en formato JSON que contiene la lista de productos.
@@ -262,13 +265,15 @@ namespace Presentation
             executed = objco.updateComment(p_com_id,p_com_clasificacion,p_com_text,p_com_fecha);
             if (executed)
             {
-                LblMsg.Text = "El comentario se actualizó exitosamente!";
-
-                clear(); //Se invoca el metodo para limpiar los campos 
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se actualizo el comentario exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
             }
             else
             {
-                LblMsg.Text = "Error al actualizar";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al actualizar el cliente', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
             }
         }
 
@@ -293,11 +298,16 @@ namespace Presentation
 
             if (executed)
             {
-                LblMsg.Text = "Se ha guardado el comentario exitosamente!";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se registró el comentario exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
+                clear();
             }
             else
             {
-                LblMsg.Text = "Error al guardar";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al guardar el cliente', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
             }
         }
     }

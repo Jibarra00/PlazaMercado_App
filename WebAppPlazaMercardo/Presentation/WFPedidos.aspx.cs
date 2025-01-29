@@ -275,12 +275,16 @@ namespace Presentation
 
             if (executed)
             {
-                LblMsg.Text = "Se guardo el pedido correctamente";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se guardo el pedido exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
                 clear();
             }
             else
             {
-                LblMsg.Text = "Error al guardar";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al guardar el pedido', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
             }
         }
         protected void BTUpdate_Click(object sender, EventArgs e)
@@ -303,12 +307,16 @@ namespace Presentation
 
             if (executed)
             {
-                LblMsg.Text = "Se guardo el pedido correctamente";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se actualizo el pedido exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
                 clear();
             }
             else
             {
-                LblMsg.Text = "Error al guardar";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al actualizar el pedido', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
             }
         }
     }

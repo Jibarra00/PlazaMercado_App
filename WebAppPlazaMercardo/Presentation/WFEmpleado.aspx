@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="WFEmpleado.aspx.cs" Inherits="Presentation.WFEmpleado" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <%--Estilos--%>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
     <link href="resources/css/Empleados2.css" rel="stylesheet" />
@@ -142,9 +143,26 @@
         // Eliminar un producto
         $('#employeesTable').on('click', '.delete-btn', function () {
             const id = $(this).data('id');// Obtener el ID del producto
-            if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
-                deleteEmployee(id);// Invoca a la función para eliminar el producto
-            }
+            //if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+            //    deleteEmployee(id);// Invoca a la función para eliminar el producto
+            //}
+            swal({
+                title: "Esta seguro?",
+                text: "Precaución se eliminará permanentemente!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        deleteEmployee(id);// Invoca a la función para eliminar el consultorio
+                        swal("Poof! Empleado Eliminado exitosamente!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("No se eliminó el Empleado!");
+                    }
+                });
         });
 
 
@@ -167,10 +185,12 @@
                 data: JSON.stringify({ id: id }),
                 success: function (response) {
                     $('#employeesTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
-                    alert("Producto eliminado exitosamente.");
+                    swal('Exitoso', 'Se eliminó el Empleado', 'success');
+                    //alert("Producto eliminado exitosamente.");
                 },
                 error: function () {
-                    alert("Error al eliminar el producto.");
+                    swal('Error', 'Error al eliminar el Empleado', 'error');
+                    //alert("Error al eliminar el producto.");
                 }
             });
         }

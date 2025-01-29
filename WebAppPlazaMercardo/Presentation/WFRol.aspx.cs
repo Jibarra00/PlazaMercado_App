@@ -249,15 +249,18 @@ namespace Presentation
 
             if (executed)
             {
-                LblMsg.Text = "el rol se guardo exitosamente";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se guardo el rol exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
                 clear();
-
             }
             else
             {
-                LblMsg.Text = "Error al guardar";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al guardar el rol', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
             }
-        
+
         }
         protected void BtnUpdate_Click(object sender, EventArgs e)
         {
@@ -275,12 +278,16 @@ namespace Presentation
 
             if (executed)
             {
-                LblMsg.Text = "Se actuaslizo el Rol";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se actualizo el rol exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
                 clear();
             }
             else
             {
-                LblMsg.Text = "Error al actualizar";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al actualizar el rol', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
             }
 
         }

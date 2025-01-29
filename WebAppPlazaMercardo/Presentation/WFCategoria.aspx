@@ -4,6 +4,8 @@
     <%-- Estilos --%>
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
     <link href="resources/css/Categoria.css" rel="stylesheet" />
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid">
@@ -32,7 +34,7 @@
         <div>
             <asp:Button ID="BtnSave" runat="server" Text="Guardar" OnClick="BtnSave_Click" />
             <asp:Button ID="BtnUpdate" runat="server" Text="Actualizar" OnClick="BtnUpdate_Click" />
-            <asp:Label ID="LblMsg" runat="server" Text=""></asp:Label>
+            <asp:Label ID="LblMsg" runat="server" Text="" CssClass="form-text text-success"></asp:Label>
         </div>
         <br />
     </form>
@@ -41,7 +43,7 @@
     <asp:Panel ID="PanelAdmin" runat="server">
 
         <h2>Lista de Categorías</h2>
-        <table id="categoriesTable" class="display" style="width: 100%">
+        <table id="categoriesTable" class="display" style="width: 100%"> 
             <thead>
                 <tr>
                     <th>ID</th>
@@ -54,6 +56,7 @@
     </asp:Panel>
 
     <script src="resources/js/datatables.min.js" type="text/javascript"></script>
+
 
     <%--Categorías--%>
     <script type="text/javascript">
@@ -120,9 +123,29 @@
             // Eliminar un producto
             $('#categoriesTable').on('click', '.delete-btn', function () {
                 const id = $(this).data('id');// Obtener el ID de la categoria
-                if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
-                    deleteCategory(id);// Invoca a la función para eliminar el producto
-                }
+                //if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+                //    deleteCategory(id);// Invoca a la función para eliminar el producto
+                //}
+
+                swal({
+                    title: "Esta seguro?",
+                    text: "Precaución se eliminará permanentemente!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            deleteCategory(id);// Invoca a la función para eliminar el consultorio
+                            swal("Poof! Eliminado exitosamente!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("No se eliminó el registro!");
+                        }
+                    });
+
+
             });
         });
 
@@ -141,10 +164,10 @@
                 data: JSON.stringify({ id: id }),
                 success: function (response) {
                     $('#categoriesTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
-                    alert("Categoría eliminada exitosamente.");
+                    swal('Exitoso', 'Se eliminó la categoria', 'success');
                 },
                 error: function () {
-                    alert("Error al eliminar la categoría.");
+                    swal('Error', 'Error al eliminar la categoria', 'error');
                 }
             });
         }

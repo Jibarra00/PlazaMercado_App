@@ -293,18 +293,22 @@ namespace Presentation
 
             executed = objUsu.saveUsuario(_email, _encryptedPassword, _salt, _state, _Create_Date, _fkrol, _fkempleado);
 
-            
-                if (executed)
-                {
-                    LblMsg.Text = "El usuario se creo correctamente";
-                    clear();
-                }
-                else
-                {
-                    LblMsg.Text = "Error al guardar";
-                }
-            
-            
+
+            if (executed)
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se guardo el usuario exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
+                clear();
+            }
+            else
+            {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al guardar el usuario', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
+            }
+
+
         }
 
         protected void BtnUpdate_Click(object sender, EventArgs e)
@@ -334,12 +338,16 @@ namespace Presentation
 
             if (executed)
             {
-                LblMsg.Text = "El usuario se actualizo correctamente";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                 "swal('Exitoso', 'Se actualizo el usuario exitosamente', 'success')", true);
+                //LblMsg.Text = "Se ha guardado el comentario exitosamente!";
                 clear();
             }
             else
             {
-                LblMsg.Text = "Error al actualizar";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "alert",
+                "swal('Error', 'Error al actualizo el usuario', 'error')", true);
+                //LblMsg.Text = "Error al guardar";
             }
         }
 

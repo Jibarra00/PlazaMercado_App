@@ -23,14 +23,14 @@ namespace Logic
             return objCat.showManagementDDL();
         }
         //Metodo para guardar una nueva gestion
-        public bool saveManagement(string p_ges_descripcion, DateTime p_ges_fecha, int _fkemployee, int _fkproduct)
+        public bool saveManagement(DateTime p_ges_fecha, string p_ges_descripcion, int _fkemployee, int _fkproduct)
         {
-            return objCat.saveManagement(p_ges_descripcion, p_ges_fecha, _fkemployee, _fkproduct);
+            return objCat.saveManagement(p_ges_fecha, p_ges_descripcion,  _fkemployee, _fkproduct);
         }
         //Metodo para actualizar una gestion
-        public bool updateManagement(int p_ges_id, DateTime p_ges_fecha, string p_ges_descripcion)
+        public bool updateManagement(int p_ges_id, DateTime p_ges_fecha, string p_ges_descripcion, int _fkemployee, int _fkproduct)
         {
-            return objCat.updateManagement(p_ges_id, p_ges_fecha, p_ges_descripcion);
+            return objCat.updateManagement(p_ges_id, p_ges_fecha, p_ges_descripcion,_fkemployee,_fkproduct);
         }
         //Metodo para borrar una gestion
         public bool deleteManagement(int p_ges_id)

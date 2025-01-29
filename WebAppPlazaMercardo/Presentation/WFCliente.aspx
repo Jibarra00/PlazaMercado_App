@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="WFCliente.aspx.cs" Inherits="Presentation.WFCliente" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <%-- Estilos--%>
 
     <link href="resources/css/datatables.min.css" rel="stylesheet" />
@@ -48,7 +49,7 @@
         <div>
             <asp:Button ID="BtnSave" runat="server" Text="Guardar" OnClick="BtnSave_Click" />
             <asp:Button ID="BtnUpdate" runat="server" Text="Actualizar" OnClick="BtnUpdate_Click" />
-            <asp:Label ID="LblMsg" runat="server" Text=""></asp:Label>
+            <asp:Label ID="LblMsg" runat="server" Text="" CssClass="form-text text-success"></asp:Label>
         </div>
         <br />
     </form>
@@ -145,9 +146,26 @@
         // Eliminar un producto
         $('#clientsTable').on('click', '.delete-btn', function () {
             const id = $(this).data('id');// Obtener el ID del producto
-            if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
-                deleteClient(id);// Invoca a la función para eliminar el producto
-            }
+            //if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+            //    deleteClient(id);// Invoca a la función para eliminar el producto
+            //}
+            swal({
+                title: "Esta seguro?",
+                text: "Precaución se eliminará permanentemente!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        deleteClient(id);// Invoca a la función para eliminar el consultorio
+                        swal("Poof! Cliente Eliminado exitosamente!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("No se eliminó el cliente!");
+                    }
+                });
         });
     });
 
@@ -169,10 +187,12 @@
                 data: JSON.stringify({ id: id }),
                 success: function (response) {
                     $('#clientsTable').DataTable().ajax.reload();// Recargar la tabla después de eliminar
-                    alert("CLiente eliminado exitosamente.");
+                    swal('Exitoso', 'Se eliminó el cliente', 'success');
+                    //alert("CLiente eliminado exitosamente.");
                 },
                 error: function () {
-                    alert("Error al eliminar el Cliente.");
+                    swal('Error', 'Error al eliminar el cliente', 'error');
+                    //alert("Error al eliminar el Cliente.");
                 }
             });
         }
