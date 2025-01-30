@@ -255,7 +255,7 @@ namespace Presentation
             DDLEmpleado.DataValueField = "emp_id";
             DDLEmpleado.DataTextField = "emp_nombres";
             DDLEmpleado.DataBind();
-            DDLEmpleado.Items.Insert(0, "Seleccione empleado");
+            DDLEmpleado.Items.Insert(0, "Seleccione usuario");
         }
 
         //Metodo para limpiar los Texbox y los DDL

@@ -1889,6 +1889,11 @@
     <Content Include="WFGestion.aspx" />
     <Content Include="WFGraficas.aspx" />
     <Content Include="WFInicio.aspx" />
+    <Content Include="WFLimonPajarito.aspx" />
+    <Content Include="WFLimonTahiti.aspx" />
+    <Content Include="WFMaracuyaPrimera.aspx" />
+    <Content Include="WFMaracuyaPulpa.aspx" />
+    <Content Include="WFMaracuyaSegunda.aspx" />
     <Content Include="WFPedidos.aspx" />
     <Content Include="WFPermiso.aspx" />
     <Content Include="WFPermisoRol.aspx" />
@@ -1897,6 +1902,7 @@
     <Content Include="WFProveedor.aspx" />
     <Content Include="WFRol.aspx" />
     <Content Include="WFUsuario.aspx" />
+    <Content Include="WFZapallo.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
@@ -1971,6 +1977,41 @@
     <Compile Include="WFInicio.aspx.designer.cs">
       <DependentUpon>WFInicio.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WFLimonPajarito.aspx.cs">
+      <DependentUpon>WFLimonPajarito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WFLimonPajarito.aspx.designer.cs">
+      <DependentUpon>WFLimonPajarito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WFLimonTahiti.aspx.cs">
+      <DependentUpon>WFLimonTahiti.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WFLimonTahiti.aspx.designer.cs">
+      <DependentUpon>WFLimonTahiti.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WFMaracuyaPrimera.aspx.cs">
+      <DependentUpon>WFMaracuyaPrimera.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WFMaracuyaPrimera.aspx.designer.cs">
+      <DependentUpon>WFMaracuyaPrimera.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WFMaracuyaPulpa.aspx.cs">
+      <DependentUpon>WFMaracuyaPulpa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WFMaracuyaPulpa.aspx.designer.cs">
+      <DependentUpon>WFMaracuyaPulpa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WFMaracuyaSegunda.aspx.cs">
+      <DependentUpon>WFMaracuyaSegunda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WFMaracuyaSegunda.aspx.designer.cs">
+      <DependentUpon>WFMaracuyaSegunda.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WFPedidos.aspx.cs">
       <DependentUpon>WFPedidos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2026,6 +2067,13 @@
     </Compile>
     <Compile Include="WFUsuario.aspx.designer.cs">
       <DependentUpon>WFUsuario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WFZapallo.aspx.cs">
+      <DependentUpon>WFZapallo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WFZapallo.aspx.designer.cs">
+      <DependentUpon>WFZapallo.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

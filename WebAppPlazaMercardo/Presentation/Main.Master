@@ -56,7 +56,7 @@
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-truck"></i>
                     </div>
-                    <div class="sidebar-brand-text mx-3">Plaza De Mercado </div>
+                    <div class="sidebar-brand-text mx-3">Pulp And Fruits</div>
                 </a>
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
@@ -84,20 +84,15 @@
                     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Login Screens:</h6>
-                            <a runat="server" class="collapse-item" href="WFInicio.aspx">Inicio</a>
+                            <%--<a runat="server" class="collapse-item" href="WFInicio.aspx">Inicio</a>--%>
                             <a id="linkCategoria" runat="server" class="collapse-item" href="WFCategoria.aspx">Categorias</a>
                             <a id="linkCliente" runat="server" class="collapse-item" href="WFCliente.aspx">Clientes</a>
                             <a id="linkComentario" runat="server" class="collapse-item" href="WFComentario.aspx">Comentarios</a>
                             <a id="linkEmpleado" runat="server" class="collapse-item" href="WFEmpleado.aspx">Empleados</a>
                             <a id="linkGestion" runat="server" class="collapse-item" href="WFGestion.aspx">Gestion</a>
                             <a id="linkPedidos" runat="server" class="collapse-item" href="WFPedidos.aspx">Pedidos</a>
-                            <a id="linkPermiso" runat="server" class="collapse-item" href="WFPermiso.aspx">Permisos</a>
-                            <a id="linkPermisoRol" runat="server" class="collapse-item" href="WFPermisoRol.aspx">Permiso Rol</a>
-                            <a id="linkProducto" runat="server" class="collapse-item" href="WFProducto.aspx">Productos</a>
+                            <%--<a id="linkProducto" runat="server" class="collapse-item" href="WFProducto.aspx">Productos</a>--%>
                             <a id="linkProveedor" runat="server" class="collapse-item" href="WFProveedor.aspx">Proveedores</a>
-                            <a id="linkRol" runat="server" class="collapse-item" href="WFRol.aspx">Roles</a>
-                            <a id="linkUsuario" runat="server" class="collapse-item" href="WFUsuario.aspx">Usuarios</a>
-
                             <div class="collapse-divider"></div>
                             <h6 class="collapse-header">Mas Paginas:</h6>
                             <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
@@ -105,7 +100,24 @@
                         </div>
                     </div>
                 </li>
-                <!-- Nav Item - Pages Collapse Menu -->
+                <!-- Pestañas de seguridad -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour"
+                        aria-expanded="true" aria-controls="collapseFour">
+                        <i class="fas fa-fw fa-lock"></i>
+                        <span>Seguridad</span>
+                    </a>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Todo la seguridad:</h6>
+                            <a id="linkPermiso" runat="server" class="collapse-item" href="WFPermiso.aspx">Permisos</a>
+                            <a id="linkPermisoRol" runat="server" class="collapse-item" href="WFPermisoRol.aspx">Permiso Rol</a>
+                            <a id="linkRol" runat="server" class="collapse-item" href="WFRol.aspx">Roles</a>
+                            <a id="linkUsuario" runat="server" class="collapse-item" href="WFUsuario.aspx">Usuarios</a>
+                        </div>
+                    </div>
+                </li>
+                <!-- Pestañas de productos -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="true" aria-controls="collapseTwo">
@@ -148,13 +160,6 @@
                     </div>
                 </li>
 
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span></a>
-                </li>
-
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
@@ -162,14 +167,6 @@
                 <div class="text-center d-none d-md-inline">
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
-
-                <!-- Sidebar Message -->
-                <div class="sidebar-card d-none d-lg-flex">
-                    <img class="sidebar-card-illustration mb-2" src="resources/img/undraw_rocket.svg" alt="...">
-                    <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                    <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-                </div>
-
             </ul>
             <!-- End of Sidebar -->
             <!-- Content Wrapper -->
@@ -375,19 +372,20 @@
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
 
+
             </div>
 
 
 
         </div>
-<!-- End of Content Wrapper -->
+        <!-- End of Content Wrapper -->
 </div>
 <!-- End of Page Wrapper -->
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2021</span>
+            <span>Copyright &copy; Your Website 2024</span>
         </div>
     </div>
 </footer>
