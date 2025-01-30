@@ -28,12 +28,12 @@
     <asp:Label ID="Label2" runat="server" Text="Ingrese el estado"></asp:Label>
     <asp:DropDownList ID="DDLEstado" runat="server">
             <asp:ListItem Value="0">Seleccione</asp:ListItem>
-            <asp:ListItem Value="Activo">Activo</asp:ListItem>
-            <asp:ListItem Value="Inactivo">Inactivo</asp:ListItem>
+            <asp:ListItem Value="Activo">En Preparacion</asp:ListItem>
+            <asp:ListItem Value="Inactivo">Entregado</asp:ListItem>
         </asp:DropDownList><br />
     <br />
     <%--especificacion--%>
-    <asp:Label ID="Label3" runat="server" Text="Especifique el estado"></asp:Label>
+    <asp:Label ID="Label3" runat="server" Text="Describa su Pedido"></asp:Label>
     <asp:TextBox ID="TBEspecificacion" runat="server"></asp:TextBox>
     <br />
     <%--fkcliente--%>
